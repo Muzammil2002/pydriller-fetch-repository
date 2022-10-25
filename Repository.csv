@@ -1,0 +1,4028 @@
+n
+Initial commit
+Initial commit
+Initial commit
+Hello GitHub
+Convert ExpressionCommand and History collector to use Rational instead of PRAT
+Return to initialization pattern in ExpressionCommand
+Update links in CONTRIBUTING to point to GitHub
+Fix links and remove outdated/internal info from README
+Fix links in ApplicationArchitecture
+"Merge pull request #2 from mcooley/doc-updates
+
+Update documentation for GitHub"
+Add clarifying comment to call to CHistoryCollector::AddOpndToHistory
+Remove empty COpndCommand destructor. Cleanup constructor declaration.
+"Merge pull request #1 from joshkoon/rational-history
+
+Convert ExpressionCommand and History collector to use Rational"
+"Update architecture doc with content for model layer (#3)
+
+* Update architecture docs with content for model layer
+
+* Update wording in Model layer description."
+"Clean up unit test projects (#4)
+
+* Rename CalculatorUnitTests_VS to CalculatorUnitTests, fix gitignore
+
+* Delete internal unit tests
+
+* Update pipeline paths"
+"Remove MSBuild directives which were used only in the internal build system (#5)
+
+Remove some properties which were only used when XefOutputRoot was set in the previous internal-only build environment."
+Fix file path in CalculatorUnitTests.vcxproj.filters (#6)
+"Remove unused PLM code (#7)
+
+Remove LayoutAwarePage, SuspensionManager, and other suspend-resume handling code. SuspensionManager::SaveAsync and related methods weren't actually called anywhere. I didn't attempt to remove the serialize/deserialize code at the ViewModel layer, although much of that is likely not needed either.
+
+We may decide we want to persist more state through a suspend-terminate-resume cycle (as the app might have done a long time ago). But if we decide we want that, we should not use a persistence mechanism that's closely coupled to frame navigation."
+"Clean up project structure in Visual Studio (#8)
+
+A few small changes to improve the view of the code in Solution Explorer:
+* Delete folders from solution explorer which don't appear on disk (Resource Files, PerfTrack)
+* Delete files on disk which aren't compiled into the project (Type.xaml)
+* Rename CalculatorHistory.Cpp to CalculatorHistory.cpp, for consistency with other files"
+"Remove calcmanager ref (#9)
+
+Calculator (the main app project) depends on CalcManager, but only transitively: Calculator -> CalcViewModel -> CalcManager.
+
+However, Calculator's project file currently has a direct dependency on CalcManager. Let's remove this to make it harder to accidentally introduce new dependencies between the layers.
+
+Also cleaning up some commented-out directives in the CalcManager MSBuild file."
+"Don't send AppLifecycle telemetry unless SEND_TELEMETRY is defined (#10)
+
+The app currently logs diagnostic events to ETW in various places. If we add certain flags to those events, the data is eligible to be sent as telemetry. (Whether it actually gets sent is controlled outside of Calculator--for example, there are lots of checks at the system level to ensure privacy settings are honored.)
+
+Currently we set the ""eligible for telemetry"" flags only in official builds, so no telemetry gets uploaded while the app is in development. We already have this set up for the main TraceLogging provider, but we also need to do this for the AppLifecycle performance logging."
+Fixing README typo
+"Merge pull request #11 from Microsoft/grochocki-patch-1
+
+Fixing README typo"
+Updated the AdjustCalendarDate() to account for the transition year quirk in the Japanese calendar.
+Updated calendar strings to use the CalendarIdentifiers object
+Moved all the Japanese Era logic inside the Year case of the switch statement
+"Merge pull request #13 from Microsoft/sanderl/JapaneseEra
+
+Date Calculation: Updated AdjustCalendarDate() to ensure we always add 365 when adding 1 year for Japanese calendar"
+"Added Bug Report and Feature Request Issue Templates
+
+Updated the default Bug Report template to customize the Device and Application information section. The Feature Request template is the default one."
+Updated feature_request.md to link to NewFeatureRequest.md
+Created pull_request_template.md
+"Merge pull request #1 from Microsoft/master
+
+Merge with master"
+Use TryResizeView to resize calc on first launch
+"Update WinUI to 2.0.181018004 (#18)
+
+Update the Microsoft.UI.Xaml NuGet package to a new version. The ARM64 framework package in 2.0.181018003.1 had entries missing from its manifest, so the classes in the package couldn't be activated."
+"Merge pull request #16 from joseartrivera/joriv/OnLaunchSize
+
+Resize app to appropriate dimensions on first launch"
+updated @mentions to Microsoft/calculator-team and updated the how validated section to include a link to contributing.md
+Added a before filing section and updated the device info section to inlcude the powershell commands to get the info
+"Merge pull request #15 from Microsoft/sanderl-pr-template
+
+Created pull_request_template.md"
+"README updates (#17)
+
+Adding the following sections:
+
+* Telemetry notice
+* Reporting security issues
+* License reference
+* Team contact email address"
+"Shortened the headers, fixed the contributing link and made placeholder description text a comment"
+updated issue templates to put placeholder text in comments
+"- Avoid referencing project headers from precompiled headers.
+
+  Before this change, the pchs for CalcViewModel and Calculator project referenced project headers.  If those project headers (or any of their dependencies) were to change, then the pch would be recompiled, slowing local build times.
+
+  By removing references to project headers, the pch will be compiled once and is resilient to changes in the project.  Now that project headers are explicit about their dependencies, when there is a change to a project header only the translation units referencing the modified header will need to be rebuilt.
+
+- Manually tested by ensuring Calculator project builds locally.
+
+@Microsoft/calculator-team"
+Fix headers in README (#23)
+"Move build jobs to hosted pools (#22)
+
+* Move build jobs to the Hosted VS2017 pool instead of our internal pool
+* Move the prepare-release-internalonly job from a team-specific pool to a shared pool with more capacity
+* Remove symbol publishing from PR/CI builds since it's not necessary; do it only in release builds"
+"CalcEngine: Convert NumObj* functions to use Rationals and move under CalcEngine::RationalMath namespace (#12)
+
+* Converts NumObj* functions to use Rationals. Places new functions under CalcEngine::RationalMath namespace
+* Moves functions that correspond to an operator to the Rational class with intent to convert to operators in the future
+* Consolidates use of RatPack's NUMBER and RAT data types to Number/Rational classes and RationalMath namespace."
+removed 'the' before the link to the NewFeatureRequest.md link
+reduced header size
+"Move RADIX_TYPE enum into its own header (#25)
+
+This change moves the RADIX_TYPE enum into its own header. This resolves a compilation error and reduces the dependency graph by allowing RadixToStringConverter to include just the enum header rather than the entire CalcEngine header.
+
+Change verified by ensuring Calculator build locally."
+Added space after NewFeatureRequest.md link to make it easier to copy
+"Merge pull request #14 from Microsoft/sanderl-templates
+
+Added Bug Report and Feature Request Issue Templates"
+"Merge pull request #21 from Microsoft/sanderl/prtemplate
+
+Updated the PR template to make it more readable and fix Contributing.md link"
+Moved the pull_request_template.md to the .github folder so it will be picked up automatically in new pull requests (#26)
+Fix Log10 function (#27)
+Update minor version to 1902 (#32)
+Change m_nPrecNum from int to size_t and rename to m_precedenceOpCount (#33)
+"Auto-flight daily builds (#30)
+
+The final step of the release pipeline is to submit the build to the Store and to our internal Aero dashboard."
+"CalcEngine: Remove the need to specify base/radix when working with Rational values (#31)
+
+- Separates values from the representation (base/radix) of those values.
+- Uses a single base for all values represented as Rationals.
+- Rationals are converted to/from a specific base when they are converted to/from strings."
+"Removing team contact email address from README
+
+Removing the team contact email address from the README and disabled it from
+accepting incoming mail from external users.  We want to encourage open communication
+with the community, and so would prefer to defer all communication to open channels
+whenever possible."
+"CalcEngine: Manage precision internally to Rational and convert functions to operator overrides (#35)
+
+* Convert Rational::Negate to an operator override
+* Convert Rational::Add to + and += operator overrides.
+* Convert Rational::Sub to - and -= operator overrides.
+* Convert Rational::Div and ::Mul to use /, /=, *, *= operator overrides.
+* Convert Rational::Mod to use %= and % operator overrides
+* Convert Rational::Rsh and ::Lsh to use >>=, >>, <<=, << operator overrides
+* Convert Rational::And, ::Or, ::Xor to use &=, &, |=, |, ^=, ^ operator overrides
+* Convert Rational relational functions to operator overrides
+* Remove unnecessary precision arguments from Rational class and remove use of explicit Rational constructors in favor of implicit conversions for value types
+* Remove unnecessary precision variable from RationalMath operations
+* Replace unnecessary Rational::Not with Xor operation
+* Remove unnecessary Rational::IsZero() in favor of == 0 comparisons
+* Fix rounding issues in ratpak that result from using large precisions.
+* Move assignment stmt out of IsCurrentTooBigForTrig"
+Rename scimath.h/cpp to RationalMath.h/cpp (#36)
+Fix spelling in some comments (#38)
+"Adding Windows Calculator Roadmap Document (#37)
+
+* Create Roadmap.md
+
+* Update Roadmap.md
+
+* Adding reference to roadmap in README
+
+* Update README.md"
+"Fix license link in README.md
+
+The link to the MIT License in README.md was broken."
+"Merge pull request #39 from Microsoft/bwaldbaum-patch-1
+
+Fix license link in README.md"
+"Update ManualTests.md
+
+Fix line breaks and the Or hotkey markdown."
+Apply spell check (#41)
+"Merge pull request #40 from Microsoft/bwaldbaum-patch-1
+
+Update ManualTests.md"
+"Move the CalculatorManager instance to be direct member data of the StandardCalculatorViewModel class.
+
+Previously, the CalculatorManager was managed with a unique_ptr that was instantiated in the ViewModel's constructor and was never re-assigned.  Objects with long lifetime and larger memory footprint should live in dynamic memory, but the ViewModel itself lives in dynamic memory so that goal is still satisfied by storing the CalculatorManager directly in the class. The change allows the compiler to write a more efficient memory footprint for the same data.
+
+- Verified by testing basic app functionality and running unit tests locally."
+Fix CI build versioning (#86)
+"Making the ""Device and Application"" section in the Bug Template easier
+
+With this update, you can directly copy/paste the commented commands
+directly into PowerShell and get the expected results."
+"Readability Improvements to Calculator.xaml (#85)
+
+* Calculator.xaml - Simple Readability Adjustments
+
+Improved readability of the XAML document by inserting newline where they were missing and removed rextra newlines from others.
+
+* Added comments and organized resources for superior readability
+
+Using comments and grouping DataTemplates, Styles and other resources significantly increases the readability and discovery of resources."
+"Update Rates Hyperlink changed to a HyperlinkButton (#29)
+
+* update currency hyperlink changed to a hyperlink button
+
+* added bug report and feature request issue tempaltes
+
+* copied pull_request_template.md to .github folder
+
+* update currency hyperlink changed to a hyperlink button
+
+* Updated hyperlink button to move text that should not be linked outside the hyperlink button
+
+* Updated hyperlink button to move CurrencySecondaryStatus text out of the hyperlinkbutton control.
+
+* Updated the HyperlinkButton to set the content without using a TextBlock and fixed the AutomationTree issue where the HyperlinkButton wasn't being seen"
+"Updating all icons/images to latest version of the ""developer build"" icons
+
+All Calculator app iconography uses the ""developer version"" icon from Design,
+to help differentiate a developer build of Calculator from the official version.
+
+Assets have been run through the image compression tools to ensure all unnecessary
+metadata has been removed."
+Switch CI builds to use public machine pool (#93)
+Documentation: revise the new feature process (#82)
+Updated UnitConvert ComboBox and Programmer Mode Radio Button Styles to Enable IsTextScaleFactorEnabled (#92)
+"Add Checked Event Handler to Add/Subtract Radio Buttons to enable Narrator  (#91)
+
+* added bug report and feature request issue tempaltes
+
+* copied pull_request_template.md to .github folder
+
+* Updated the DateCalculation narrator logic to use PropertyChangedCallbacks for the DateResultLabel and DateDiffAllUnitsResultLabel TextBlocks.
+
+* Reverted textblock callback changes and added an event handler for when the radio buttons are checked.
+
+* Revert NarratorAnnouncement.h changes and removed unused code from DataCalculator.xaml.h. Updated comments in RaiseNotification method in DateCalculator.xaml.cpp
+
+* Reverted changes in NarratorAnnouncement.h and NarratorAnnouncement.cpp
+
+* Added SAL annotation to AddSubtractOption_Checked
+
+* Remove namespaces from input types on AddSubtractOption_Checked"
+"Suppress conversion warning in Ratpack/conv.cpp.
+
+When building for x64, the compiler complains:
+    warning C4267: 'argument': conversion from 'size_t' to 'ULONG', possible loss of data
+
+In practice, the number string will not exceed a ULONG in length."
+Update pipelines badge on README to point to public CI (#99)
+windows store is now called microsoft store
+"Fix initialization order in CEngine (#118)
+
+The order of initialization of fields is required to match the one in
+class member fields declaration."
+Correct spelling mistakes
+Add explicit [[fallthrough]] attribute
+Remove unused values
+"Fix comment on IsEven
+
+Looks like the comment on IsEven should read this way instead of ""The assumption here is its numerator is 1 and we are testing the numerator is even or not"""
+Fix smart quotes (#131)
+updating nuget.org source to point to V3 (#129)
+Switch urls from http: to https: (#137)
+Modify how default units are selected for conversions (#126)
+Catch polymorphic types by const-ref (#125)
+HTTPS link to editorconfig.org (#134)
+Spelling (#135)
+Replace escape sequences with path separators in include paths
+Mark classes as `final` where applicable (#189)
+Remove unused variable (#184)
+Remove duplicated condition checks (#187)
+Fix usage of temporary string (#185)
+"Remove invalid links from comments (#201)
+
+Remove invalid links from comments"
+Add `override` keyword where applicable (#188)
+"Compare locale strings, not their pointers (#183)
+
+Change the stored locale type to wstring to make the comparison operator
+work."
+fixed typo (#171)
+"Build with /W4 (#197)
+
+All projects are built with warning level 4 (/W4) and treat warnings as errors (/WX).
+Fixed build errors resulting from enabling these compiler flags."
+Update punctuation in README.md (#205)
+Fix indentation and extra newline (#198)
+"add .editorconfig to set some basic coding styles  (#225)
+
+To maintain consistent code style between contributors and simplify merging, the solution should provide a .editorconfig to set some basic rules (already used by the current code source).
+
+- use `UTF-8` with BOM (some files are without)
+- use CR-LF
+- use <kbd>Space</kbd> to indent (sorry #teamTab)
+- trim trailing whitespace 
+- be sure to add a new line at the end of files.
+
+[Documentation](https://docs.microsoft.com/en-us/visualstudio/ide/create-portable-custom-editor-options?view=vs-2017)"
+"fix: redundant semicolons (#230)
+
+### Description of the changes:
+- Remove redundant semicolons in:
+  - [x] UnitConverter.cpp
+  - [x] DateCalculator.xaml.cpp
+  - [x] CopyPasteManagerTest.cpp
+
+### How changes were validated:
+-  Manual"
+"Remove end-of-line from .editorconfig (#239)
+
+* Add Editor config
+
+* reset sln
+
+* remove end-of-line setting"
+"Remove duplicate .editorconfig. (#257)
+
+* Remove duplicate .editorconfig
+* Update .editorconfig to remove forcing crlf as discussed in #225."
+"CopyPasteManagerTest fails to test all values (#269)
+
+CopyPasteManager unit tests were not fully run, the first item of arrays were never tested. (Luckily, the not-tested values were ok).
+
+Updated from using a pre-decrement while loop to using a standard for loop with an iterator."
+"Eliminate redundant copies of EMPTY_UNIT object, saving 2.5 KB. (#235)
+
+### Description of the changes:
+
+There are currently 11 copies of the `EMPTY_UNIT` object in the
+`Calculator.exe` binary, which not only wastes space/footprint in the
+binary itself, but also means that each copy must be separately
+initialized, which effects performance.
+
+The reason for this is that the object is defined in a shared header
+file, which then is included by multiple .cpp files, causing each
+translation unit (.obj) to get a full complete copy of the object.
+
+By marking the object as `inline` we can
+instruct the linker to define the object once, as we do
+not need to have 11 unique versions of the EMPTY_UNIT object,
+we only need 1.
+
+The net result is that the `Calculator.exe` binary size is reduced by
+2,560 bytes (or 2.5 KB) with no change in behavior, other than
+the small performance benefit of not initializing 10 redundant copies
+of the object.
+
+### How changes were validated:
+- Manually tested."
+"Remove logging of invalid pasted text (#286)
+
+Addressing community feedback for removal of diagnostic data"
+"Remove .editorconfig from sln (#290)
+
+#225 accidentally added a duplicate .editorconfig to the repo as well as to the solution.
+#257 removed the duplicate .editorconfig, but not its entry in the solution.
+This update removes the extra .editorconfig reference to a version that #257 already removed from the repo."
+"Make 73 numeric constants const, moving them into .rdata (#234)
+
+This change makes the 73 variables in ratconst.h actually
+inline const, which allows them to move from the mutable .data
+section of the executable, and into the read-only .rdata
+section instead.
+
+Moving data to the .rdata section has a number of benefits,
+such as preventing possible corruption due to stray writes,
+or other memory corruption.
+
+Additionally, the initialization at run-time start-up is no
+longer needed, so there is also a reduction in the .text
+(code) section as well.
+
+As a result the overall size of the Calculator.exe binary
+(on x64 Release builds) decreases by 1,536 bytes (or ~1.5 KB)
+with no change in behavior other than a small performance benefit."
+"Fix declarations of functions (#186)
+
+Move file-scope functions to anonymous namespaces.
+Drop #pragma once from .cpp files"
+Remove RenderTransform that is never used (#247)
+"Optimised images losslessly. (#229)
+
+Saved 301 KB out of 9.2 MB. 15.8% per file on average (up to 82.2%)
+Fixes #.
+Saves 301 KB (although not all files are included in the build)
+Description of the changes:
+For PNG files: used a combination of Pngcrush, OxiPNG, AdvPNG, PNGOUT and Zopfli
+For GIF files: used Gifsicle
+How changes were validated:
+No changes to behaviour or source code.
+Previewed the changed files to make sure they still work"
+"Fixes #282 Narrator does not convey error information when no more Right Parenthesis can be added in expression. (#284)
+
+* Added narrator announcements when right parenthesis is clicked"
+"Replace custom ARRAYSIZE macro with std::size (#208)
+
+* Replace custom ARRAYSIZE macro with std::size"
+"Fix memory leak (#300)
+
+Free memory allocated to temp before returning from the function."
+"Activate TextSelection on all interesting values/results (#213)
+
+If we allow users to select texts, the application will feel more like a ""Desktop app"", will be easier to use on a tablet and users will be more prompt to use Ctrl+C to use the result in another app."
+"Updating comments per the C++ core guidelines and removing trailing whitespace (#194)
+
+Fixed comments that were inconsistent with the style guidelines described in C++ core guidelines and the modern C++/WinRT language projections and removed trailing whitespace.
+
+Inserted a space after the beginning of the comment so the text wasn't touching the // on all occurrences.
+
+Removed all occurrences of trailing whitespace"
+"Fix grid.Row (#279)
+
+Fixes #265
+Fixes invalid grid.Row assignment for decimalSeparatorButton"
+"DateDiff: Optimize how we build the string used when we calculate the difference between 2 dates (#195)
+
+Optimize how we build the result of GetDateDiffString and GetDateDiffStringInDays, using std::wstring (mutuable) instead of Platform::String (immutable)"
+"Added support for pasting of monetary values (#176)
+
+Fixes #52
+
+Description of the changes:
+Added support for pasting of prefix currency symbols supported by the Windows keyboard.
+yen or yuan (¥)
+unspecified currency sign (¤)
+Ghanaian cedi (₵)
+dollar or peso ($)
+colón (₡)
+won (₩)
+shekel (₪)
+naira (₦)
+Indian rupee (₹)
+pound (£)
+euro (€)
+
+How changes were validated:
+Manually tested each prefix currency symbol supported by the Windows keyboard and ran unit tests."
+Fix compilation issues due to unsigned/signed warnings treated as errors (#317)
+"Fix issue with Date diff when it includes a Daylight Saving Time (#193)
+
+The application uses local time to calculate the number of days between 2 dates. If a Daylight Saving Time takes place during this period of time (only Clocks Forward 2am->3am), the application will miss 1 day and fail to calculate the number of days/weeks/months between the 2 dates.
+image
+
+Description of the changes:
+DateCalculationEngine uses local time to modify dates, however, AddDays, AddWeeks,... won't add 24 hours or 7 days if DST happens between the 2 dates, but instead add ~23.9/24.1 hours or ~6.9/7.1 days (depends if it's the DST clock backward or clock forward). When the DST is clock forward, DateCalculationEngine will miss one day.
+
+Solution
+use UTC dates to calculate date difference.
+
+Extra Fix:
+use calendar->FirstPeriodInThisDay and calendar->FirstHourInThisPeriod in ClipTime (else it will set the time to 12PM (noon) in some regions.
+replace OBSERVABLE_PROPERTY_RW by OBSERVABLE_PROPERTY_R when possible.
+remove the definition of CheckClipTimeSameDay (implementation missing)
+
+How changes were validated:
+Tested manually with different regions (FR, US, ES, JP).
+
+Fixes #178"
+"Improving code style : verbosity, indentation levels (#200)
+
+Fixing some nested if() statements and reducing indentation levels.
+
+Making some sections less verbose, e.g:
+
+if (a == 1)
+{
+    b = true;
+}
+else
+{
+    b = false;
+}
+↓
+
+b = (a == 1)"
+"Propose minor code-cleanups (#241)
+
+Description of the changes:
+Remove unnecessary 'else', 'continue' statements
+
+How changes were validated:
+Manual."
+Add explicit [[fallthrough]] attributes in Ratpack (#323)
+"Fix formatting issues with CurrencyConverter and some locales (#242)
+
+The ViewModel wrongly assumed that non-breaking spaces were only used between the value and the symbol. It's not the case of all locales using non-breaking spaces as a thousand delimiter (French for example).
+
+When it was the case, the function only replaced the first thousand delimiter found and kept the extra space at the end of the string, generating 2 issues:
+
+Extra space at the end: #240
+Bad formatting of the number: #232
+
+Description of the changes:
+   Replace currencyResult.find(L'\u00a0') by a regex only removing spaces at the end of the string.
+
+Fixes #240 and #232"
+"hide history button in programmer mode (#327)
+
+Description of the changes:
+  Hide the History button when in Programmer mode via VisualState
+
+How changes were validated:
+  Open Standard mode
+  Switch to Programmer mode
+  Verify that the History button isn't visible
+
+Fixes #326"
+"Fix auto-scaling of CalculationResult when the current locale displays currency symbols on the right (#246)
+
+* Fix auto-scaling of CalculationResult when the current locale displays symbols at the right
+
+* Formatting
+
+* add padding
+
+* modify padding of ValueContainer"
+ViewModelProperties namespaces converted to static member properties. (#306)
+Remove unused member field from CalculatorHistory (#330)
+"Update Roadmap.md (#339)
+
+Adding Graphing Mode to the roadmap."
+Replace fallthrough comment with C++17's attribute (#334)
+Remove redundant type qualifiers on function return type (#329)
+"Propose code-cleanups#2 (#253)
+
+Description of the changes:
+
+Remove redundancy
+Simplify if statements"
+Remove expression with no effects from CalculatorManager (#337)
+"Fix order of initialization list in CalculatorManager, COpndCommand (#332)
+
+This ensures the initialization order matches the layout of member
+fields in class declaration"
+"Make CalculatorManager final rather than sealed (#331)
+
+I have no idea if it is required to be `sealed`, I have seen no `^`
+operator which makes me think it could be a regular C++ code, barring
+the concurrency stuff."
+"Simplify multiple ""or"" operators (#341)
+
+Use implicit enum to int conversion to simplify some value checking against the Command enum."
+"Disable component governance task in localization build (#353)
+
+Internally, a ""component detection"" task is automatically injected into builds to make sure we're not using any components with known security vulnerabilities. Because this task runs during the main app builds, it doesn't also need to run in the pipeline which hands off strings to the localization system."
+Add TemporaryKey.pfx (#354)
+Update localized strings (#357)
+"[Build] Update localization handoff pipeline (#359)
+
+Update the localization build so that it sends strings to our internal localization system on a nightly basis and produces a patch file which we can use to check translations back into the repo."
+Updating version of release builds to 1903 (#361)
+"Update the year in the Copyright string (#320)
+
+Templatize the copyright string and use a build variable to set the year for use across the entire app.
+
+How changes were validated:
+Tested with English and French and with different dates."
+"[Build] Remove conditional inclusion of resw files (#360)
+
+The .resw files for all languages are expected to be checked into the repo (this used to not the the case). Let's remove the conditions in the project file which ignore them if they don't exist.
+
+Additionally removes pseudo-loc resource references from the build as pseudo-loc resources aren't currently being generated."
+"Disable use of min/max macros defined by Windows headers. (#363)
+
+Description of the changes:
+  Disable Windows-provided min/max macros using the NOMINMAX flag. Add the flag to each project's pch to disable the macros across the solution.
+
+How changes were validated:
+  Project builds.
+  Unit tests pass.
+  Smoke tests.
+
+Fixes #362."
+"Accept plus/minus sign before a parenthesis in ClipboardManager (#346)
+
+Modify scientificModePatterns regexes to support minus sign before parenthesis."
+"Don't run component governance detection in postbuild steps (#381)
+
+See also #353.
+
+In the internal build environment, there's an auto-injected component governance task which needs to run once during the build. This task doesn't need to run during the unit test, package, and internal release jobs."
+Fix padding of unit converter when the current locale displays symbols on the left (#373)
+"Improve performance of SupplementaryResult + Modify the height of RowDltrUnits when UnitConverter is in Landscape (#249)
+
+* Modify the height of RowDltrUnits when UnitConverter  is in LandscapeLayout mode
+
+* clean
+
+* Use the same layout than the existing one while fixing the issue
+
+* Refactor SupplementaryItemsControl to improve performance, not rely on parents and not force the parent element to be HorizonAlignment=""stretch""
+
+* take feedback into account
+
+* add HorizontalNoOverflowStackPanel to vcproj.filters
+
+* format conditionals
+
+* replace max by std::max"
+"Replace custom types with standard ones (#212)
+
+Replace custom types with standard ones"
+"Add additional defines for MSVC ARM and ARM64 to conv.cpp (#399)
+
+Fixes ARM(64) regression introduced with #212"
+"Update README to add description of ""date calculation"" functionality  (#365)
+
+Fixes #140.
+
+Added a one-liner description about the date calculation functionality
+
+Description of the changes:
+* This change maintains consistency by writing it after the description of the programmer calculator so that it matches the order of the positions of these functionalities in the hamburger menu of the calculator.
+* Just like the other descriptions, this is also a one-liner
+* This description covers both the functionality under ""date calculation"" i.e. the difference between the dates and adding/subtracting a date from another.
+
+Co-Authored-By: sonali9696 <sonali9696@gmail.com>"
+Updating version of release builds to 1904 (#422)
+Fix inline script in loc pipeline (#434)
+"Add Reveal Highlight on AccentCalcButtonStyle + fix accessibility iss… (#374)
+
+Add Reveal Highlight effect on the 4 basic operator buttons + Equal button (effect more visible with purple and all grey-ish accent colors). Also fixes a high contrast issue when the operator buttons were pressed."
+Update localized strings 2019-04-04 (#438)
+"Optimize and simplify CalculationResult to be able to update the FontSize and the DisplayMargin without fully updating the Style. (#217)
+
+- Merge the 3 CalculationResultStyle(S|M|L) in App.xaml
+- Only modify CalculationResult::*FontSize in Calculator.xaml instead of fully updating the style of the control.
+- Create a new property MaxFontSize in order to be able to update it without being forced to fully update the Style (because m_startingFontSize was set in OnApplyTemplate)
+- Modify how DisplayMargin is managed to prevent the textblock Margin to shift when we update its value (without fully updating the Style)."
+"Fix invalid check of m_precedenceOpCount (#298)
+
+The conditional m_precedenceOpCount >= 0 was always true because m_precendenceOpCount is an unsigned type. Update the conditional to simply be true and rely on a break statement in the loop. Although this member variable used to be a signed type, in practice, the value was never less than 0.
+
+How changes were validated:
+Manual. Unit tests pass locally."
+"Updating Contributing (#431)
+
+Updating Contributing documentation:
+* Adding reference to spec repository for feature development
+* Adding localization issue template
+* Adding clarifications for contributions and PRs"
+"Feature/GraphingCalculator initial commit (#450)
+
+Initial PR for the feature/GraphingCalculator feature branch, part of #338.
+
+The feature incorporates a proprietary Microsoft-owned graphing engine to drive graphing experiences in the Windows Calculator app. Due to the private nature of the graphing engine, the source available in the public repo will make use of a mock graphing engine. See README.md for more details.
+
+This PR simply serves as a base for future feature development. As such, the PR will be immediately merged. Feedback on the content of this PR, and on the feature in general, is encouraged. If there is feedback related to the content of this specific PR, please leave comments on the PR page. We will address the comments in future PRs to the feature branch."
+"Simplify some of the calc engine string logic (#449)
+
+Description of the changes:
+Currently Calculator handles strings by defining integers for each type of function that can be performed, this integer will eventually correspond with an index in s_engineStrings which holds the corresponding display string for each function. Some functions such as Sin can have multiple strings (degrees, rads, grads, inverse). Functions like Sin are mapped to another array called ""rgUfne"" where a new integer is given depending on the output string which will then be given to s_engineStrings. The new integer returned by the ""rgUfne"" array runs the risk of overlapping with any new functions that may be added in CCommand.h. Furthermore, it is expected that the strings in s_engineStrings and rgUfne are defined in a particular order (not necessarily sequential), otherwise the logic will break. This makes adding new strings for new functions confusing and difficult, since a lot of the logic is not clearly defined.
+
+This PR attempts to make this a bit simpler by changing the s_engineStrings and rgUfne arrays to be unordered_maps instead of arrays. For s_engineStrings the keys will now be strings, allowing the existing logic for indexing to be used by simply converting the number into a string to access the value. This will also allow us to create keys in the future that are not limited to integers but to strings that hold more meaning.
+
+The rgUfne array will also be updated to be a map that will take in an integer and give you the corresponding string that can be passed to s_engineStrings. The UFNE object in the rgUfne array will also be updated to hold all the possible string keys for a function, instead of indexing them on other numbers that may overlap with existing definitions.
+
+Now to add a new string for a new IDC_FOO function, we would just need to add the ""FooString"" resource keys to the g_sids array and use the updated rgUfne map to link the IDC_FOO value to the corresponding ""FooString"" resource key. This way the resource key can be a meaningful string, and not an integer that must be in any particular order.
+
+How changes were validated:
+Tested each function manually in standard, scientific, and programmer modes."
+Drop unneeded const-qualifier on return type (#396)
+"Improve the support of Narrator with parenthesis (#368)
+
+* Modify how we manage Narrator with parenthesis and refactor right parenthesis
+
+* Optimization
+
+* remove extra spaces
+
+* take feedback into account"
+"Prevent the application to crash when the current page is Date Calculation and users paste a text (#391)
+
+Fix the else condition in ApplicationViewModel::OnPaste
+
+How changes were validated:
+Manually
+
+Fixes #389"
+Internal builds now require the OAuth access token (#457)
+"Keep input when users refresh currency rates (#369)
+
+Fixes #260
+
+Description of the changes:
+prevent UnitConverterViewModel to reset values when users click on update rates.
+recompute UnitConverter's caches (m_ratioMap and m_categoryToUnits) once rates are updated (but check first if the user did/didn't change the category)
+
+How changes were validated:
+Manually tested with fake currency rates (HTTP responses modified on the fly via FiddlerCore)
+Verified that it works no matter the selected field (From or To)
+Verified that the currencies selected are kept after a refresh"
+"Modify how modulo is calculated in Normal and Scientific mode. (#412)
+
+## Fixes #111
+
+> The modulo operator on this calculator gives the result that is different to the most used calculators.
+
+The current `modrate` function is the equivalent of rem(...)/remainder(...), not mod(...)/modulo(...) available in some popular Math apps. 
+
+### Description of the changes:
+- rename `modrate` in `remrate` to be more accurate.
+- add `modrate`, calculating modulo similarly to Matlab, Bing, Google calculator, Maxima, Wolfram Alpha and Microsoft Excel 
+- Add `RationalMath::Mod` using `modrate` as an alternative to `Rational::operator%` using `remrate`
+- Add a helper `SIGN` to retrieve the sign of a `Rational`.
+- modify `CalcEngine` to use `modrate` in Normal and Scientific mode and `remrate` in Programmer mode.
+
+### How changes were validated:
+- manually and unit tests added"
+"Removed AppBar, OperatorTextBox and OperandTextBox controls (#440)
+
+Fixes #407 
+Removed AppBar, OperatorTextBox and OperandTextBox controls"
+"Add support for Pyeong, a Korean floorspace unit. (#444)
+
+Fixes #382
+Description of the changes:
+Add Pyeong as an Area conversion unit.
+Pyeong shows up only if the user's current region is Korea ( i.e. region is either KP or KR ).
+Added Korean translation for Pyeong (평). For other locales, we default to English ( Pyeong ).
+How changes were validated:
+Manually tested the below
+
+For non-Korean regions, Pyeong does not show up.
+
+Korean region with Korean locale => Pyeong shows up and Pyeong is correctly translated.
+pyeong_Korean
+
+Korean region with English locale => Pyeong shows up and Pyeong is in English.
+pyeong_English
+
+Korean region with simplified Chinese locale => Pyeong shows up and Pyeong is in English.
+pyeong_Chinese"
+"Compile CalcManager project with or without precompiled headers (#436)
+
+Fixes #324 .
+
+Description of the changes:
+In an effort to support other compilers (#109), this change reworks how precompiled headers are handled. For toolchains where precompiled headers are not used, there is unnecessary compilation cost because each source file explicity includes the pch, meaning all system headers in the pch were recompiled for each translation unit. This change modifies the project's files so that each translation unit includes a minimal set of dependent headers. For MSVC users, the precompiled headers option is still enabled and the precompiled header is added to each translation unit using the compiler's Forced Includes option. The end result is that MSVC users still see the same build times, but other toolchains are free to use or not use precompiled headers.
+
+Risks introduced
+Given that our CI build uses MSVC, this change introduces the risk that a system header is added to the pch and the CalcManager project builds correctly, but builds could be broken for other toolsets that don't use pch. We know we want to add support for Clang in our CI build (#211). It seems reasonable to also compile without precompiled headers there so that we can regression test this setup.
+
+How changes were validated:
+Rebuild CalcManager project. Compile time: ~4.5s.
+Disable precompiled headers, keeping explicit include for pch in each source file. Compile time: ~13s.
+Remove explicit pch inclusion and add the appropriate headers to each translation unit to allow the project to compile. Compile time: ~8s.
+Re-enable pch and include it using the Forced Includes compiler option. MSVC compile time: ~4.5s.
+Minor changes
+Delete 'targetver.h'. I found this while looking around for system headers in the project. It's unused and unreferenced so let's remove it."
+"Decrease CPU usage of OverflowTextBlock + optimization (#403)
+
+Fixes #402 and #414
+Divide by 4 the CPU usage of OverflowTextBlock when buttons are pressed very quickly.
+
+Description of the changes:
+
+Xaml-side:
+OverflowTextBlock has some performance issues:
+double scrollviewer: the listview was in a scrollviewer, while the control already containing one -> it breaks the virtualization of the listview and impacts on UI performance.
+The listview used a StackPanel, this panel doesn't support virtualization of ListViewItems contrary to ItemsStackPanel
+
+No ListView-specific features were used, an ItemsControl is more efficient and lighter.
+refactor how we manage the visibility of the left/right buttons in OverflowTextBlock, the new version is more reactive and will not display the right arrow when not necessary (see GIF below).
+remove the ItemContainerSelector ExpressionItemContainerStyle, not really used by OverflowTextBlock
+
+remove UI glitches generated by ChangeView when users type fast (control partially hidden and scrolling issues, see the GIF below).
+only modify the accessibility view when it's necessary
+
+ViewModel-side:
+stop fully refreshing ExpressionTokens in StandardCalculatorViewModel when a new command were sent, instead, use a IObservableVector to only send new tokens to the UI (in average only 1 or 2 UI items are refreshed while the full expression was refreshed before)
+
+How changes were validated:
+Manually"
+"Refactored XAML x:Names (#433)
+
+Description of the changes:
+-Refactored all x:Names to use the generally accepted Pascal-Casing
+
+How changes were validated:
+Unit Tests
+Manual Tests"
+"Fix test code that never executes (#465)
+
+Fixes #175.
+Fixes loop in test code to verify that commands not supported by the unit converter viewmodel result in no-op.
+
+Description of the changes:
+Removed loop of range of enums with a being tested for no-ops since it added no intrinsic value (and the way that the range was handled was incorrect).  Considered adding an iterator over a static list of commands to validate against, but determined it didn't add any notable value.
+
+How changes were validated:
+Ran modified test to ensure it passes"
+"Fix UI issues with UnitConverter in RtL (#410)
+
+Fix #409 - Some content in Currency Converter not right-aligned properly in RtL
+Fix #59 Currency symbol precedence is opposite of system setting in RTL languages
+
+Description of the changes:
+Add a property FlowDirectionHorizontalAlignment in UnitConverter to align some controls to the right (without modifying the FlowDirection of their parent items)
+Force FlowDirection of Value1Container and Value2Container to LeftToRight (but align panels to the right)
+
+How changes were validated:
+Tested with LtR and RtL languages and with currency symbols on the left and on the right."
+"Simplify title bar (#442)
+
+Fixes #407 (partially) and #441
+
+Description of the changes:
+Remove TitleBarHelper and all <Border x:Name=""CustomTitleBar"" />
+Let the system defines the draggable region
+Centralize all events and functions associated to the title bar in a single control TitleBar instead of code splitted between MainPage/TitleBar/HistoryList/Memory.
+Use the standard title bar when high contrast is activated instead of the custom one.
+Modify the color of the title when the window doesn't have focus
+Fix the right padding of the title bar with high contrast
+
+How changes were validated:
+Manually tested with LtR and RtL languages
+Manually tested with high contrast
+Tested when History and Memory flyout are opened"
+"Clicking on the same element in the hamburger view should re-open that view, like the menu items do (#447)
+
+Fixes #437.
+Clicking on the same element in the hamburger view should re-open that view, like the menu items do
+
+Description of the changes:
+-Fixed the bug that was listed
+
+How changes were validated:
+-manual"
+"Add Pan/Zoom support for the graph surface (#458)
+
+Description of the changes:
+Add Pan/Zoom support for the graph surface.
+Currently only supports Mouse/Pen/Touch interactions. Keyboard support will be added separately.
+
+How changes were validated:
+Manual"
+"Updates to copypastemanager (#390)
+
+Related to #55 and #64
+Description of the changes:
+Added constexpr to formerly static const or #define variables
+Applied C++ Core Guideline NR.2
+Added auto and const in appropriate places
+
+How changes were validated:
+Used the provided unit tests"
+"Collapse CurrencySecondaryStatus when no text is present in the text block (#467)
+
+Fixes #313
+In Scan/Item mode, Narrator focus navigates to hidden element “No next item” after “Update rates” link in ""Currency Converter"" window #313
+
+Description of the changes:
+Adds an x:Name to the CurrencySecondaryStatus text block
+Adds a NormalCurrencyStatus visual state to the CurrencySecondaryStatusStates
+Adds functionality to the CurrencySecondaryStatusStates to show or hide the CurrencySecondaryStatus text block.
+
+How changes were validated:
+Verified that the textblock is not visible in the accessibility tree via inspect.exe from the windows sdk.
+Verified that Narrator also does not stop on the block when in scan mode.
+Verified that the textblock is visible in the accessibility tree and read out in Narrator when the ChargesMayApplyCurrencyStatus or FailedCurrencyStatus viewstates are set."
+"Update README to include infinite precision (#470)
+
+Fixes #119
+
+Added infinite precision as a feature in README.md and in ApplicationArchitecture.md
+
+How changes were validated:
+Manual preview of README and ApplicationArchitecture.md"
+"Update the .gitignore to ignore GraphingImplOverrides.props. (#472)
+
+Description of the changes:
+Update the .gitignore to ignore GraphingImplOverrides.props.
+
+This update already exists in the feature branch but we can merge it to master now to make development of the feature easier and prevent accidentally commiting this file.
+
+How changes were validated:
+Manual.
+
+Switch to feature branch. Add GraphingImplOverrides.props
+Switch to dabelc/IgnoreGraphingImplOverrides.props. Confirm git shows no files changed but props file is present."
+"Allow vcxproj and sln files to merge as text. (#474)
+
+Description of the changes:
+This will cause Git to insert conflict markers in the file and make it easier to identify and fix merge conflicts. Previously, Git would complain about conflicts with these files, but no markers were inserted.
+
+How changes were validated:
+Manual.
+
+Checkout feature/GraphingCalculator and merge in upstream/master. Git identifies merge conflicts present for Calculator.vcxproj but there are no conflict markers in the file. Abort the merge.
+Merge in dabelc/MergeProjectFilesAsText. Confirm Git is able to merge Calculator.vcxproj."
+"Fix #471 (#473)
+
+[JaEra] Calc: subtracting 1-year from date during Reiwa 1 yields unexpected results."
+Miscellaneous updates to internal release builds (#477)
+Added WinAppDriver UI Tests to the Calculator Project. (#411)
+"Fix bug when the negate sign is before a space  (#345)
+
+* Ignore None characters while parsing the clipboard
+
+* reformat"
+UI Tests YAML updated to integrate WinAppDriver task  (#480)
+"fixes #471 (#481)
+
+Expand fix for ja era to handle months and days"
+Update winui to 2.1 (#484)
+"Fix the project code style, as it is not consistent. (#236)
+
+Fixes #202
+This PR fixes code style for the project files.
+
+The Problem
+Different files in the project use different code style. That is not consistent and leads to harder maintenance of the project.
+
+Description of the changes:
+Have investigated and determined the most used code style across the given codebase
+Have configured IDE and applied code style to all project files.
+Have crafted clang-formatter config.
+see https://clang.llvm.org/docs/ClangFormat.html
+https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+Some cases were fixed manually
+How changes were validated:
+manual/ad-hoc testing, automated testing
+
+All tests pass as before because these are only code style changes.
+Additional
+Please review, and let me know if I have any mistake in the code style. In case of any mistake, I will change the configuration and re-apply it to the project."
+"Secondary formatting changes (#489)
+
+Description of the changes:
+Adjusted some of the values in .clang-format
+Add clang-format-all.ps1
+Fix path to .clang-format in Calculator.sln
+
+How changes were validated:
+Manual."
+"Accept exponential numbers without -/+ sign. (#270)
+
+* add exponential without sign support
+
+* Add unit tests
+
+* fix formatting
+
+* remove extra spaces
+
+* modify unit tests"
+"Remove Serialize/Deserialize functions never used in StandardCalculatorViewModel, UnitConverter, UnitConverterViewModel and CalculatorManager (#392)
+
+* remove unused serializer
+
+* remove all unused serialization/deserialization from StandardCalculatorViewModel and UnitConverterViewModel
+
+* formatting"
+Update localized strings 2019-05-09 (#496)
+Updating version of release builds to 1905 (#500)
+"Repair empty link in ApplicationArchitecture.md (#502)
+
+Link to the same infinite-precision-arithmetic article on Wikipedia as in README.md
+
+Fixes
+Existing output in the ApplicationArchitecture.md is a literal
+[infinite precision][Infinite Precision]. It should be a link to https://en.wikipedia.org/wiki/Arbitrary-precision_arithmetic.
+
+Description of the changes:
+This patch assumes the author intended to link to the same Wikipedia article linked to in README.md"
+"Keep spaces when users copy an error message (#430)
+
+Verify if the StandardCalculatorViewModel::DisplayValue isn't an error message before removing group separators (including space character).
+
+How changes were validated:
+Tested in english and french
+Tested with ""Cannot divide by zero"" and ""Result is undefined""
+
+Fixes #420"
+"Removed GroupName from JumpList so items can't be pinened or removed by user. (#499)
+
+https://stackoverflow.com/a/39436591/942659"
+"Fix unit tests to run on non-english devices (#289)
+
+* Force en-US for unit tests
+
+* fix some spacing issues after merge
+
+* remove default argument of LocalizationService to fix compilation issue in Release mode"
+Removed entrance transition for about button in NavigationView (#506)
+Updating terminology in new feature development process for clarity (#509)
+"Added the name property for CalculationResult right/left scroll buttons on screen (#503)
+
+* Added the property name to be shown on the Scrollable links to solve issue 482
+
+* Added the x:uid tag for the buttons and also added the automationID
+
+* Added two new uids keys for the left and right scroll buttons for the calculation result."
+"Update bug/feature templates to track if submitter requests assignment (#510)
+
+An additional datapoint that can be helpful during triage of bugs and features
+is if the submitter is interested in being the implementer as well.
+
+Updating the bug_report and feature_request templates to help track this."
+Force compiler to use utf-8 so the project compiles on systems in Chinese (#516)
+Update localized strings 2019-05-24 (#521)
+"Migrate currency converter endpoints (#524)
+
+We are migrating the REST endpoint that Currency Converter uses. The REST endpoint is not licensed for your use. To continue to enable community participation in the development of the feature, developer builds will use an alternate REST endpoint that serves mock data (clearly identifiable as it references planets instead of countries)."
+Wrap json parsing in try/catch (#534)
+Update internal package version (#532)
+Updating version of release builds to 1906 (#537)
+"Add CMake project, GCC support (#540)
+
+This is extract from #211 that enables compilation with GCC. With #211
+now in the state of bitrot, I would rather try approaching it in smaller
+steps that can be hopefully merged quicker, even if it does not provide
+full support for all the features #211 provided.
+
+This will _compile_ correctly with my (@janisozaur) GCC, but clang is
+more picky about flexible array members and refuses to compile it yet.
+I will extract remaining parts of #211 in future PRs.
+
+I marked @fwcd as author, as he did most of the work in #211."
+"Drop __inline from conflicting declarations (#545)
+
+`mulnum` et al. are declared `extern` in `ratpak.h`, which conflicts
+with the `__inline` used with them. Additionally, most similar functions
+don't have such keyword applied to them."
+"Fixes bug #483 by setting AccessibilityView property to Raw for hidden units
+
+* Fixes bug #483 by setting AccessibilityView property to Raw for hidden units"
+"Bound the calendar picker to the control above (#507)
+
+* Bound the calendar picker to the control above
+
+* collapsed textbox and added headertext to the calendar picker element
+
+* collpased textbox from both To and From calendar picker used headertext instead
+
+* localized strings for the new headers added for the calendar date pickers
+
+* modified the resoruces file so as to localize the strings
+
+* remapped the grid components after the removal of the text Block
+
+* restored original spacing between components"
+"Handle date difference for ends of months (#553)
+
+The incrementally calling `Window::Globalization::Calendar::AddMonths`
+resulted in a negative value for `GetDifferenceInDays` which was then
+assigned to an unsigned variable `daysDiff`.
+
+One example of the issue when running the calculator in UTC+2 was the
+difference between July 31st and December 30th.
+
+The initial guess was 4 months which then landed on November 30th.
+This date was stored and then in the loop incremeted by one month.
+This then landed precisely on the end date December 30th.
+After the loop the final value is then used July 31st + 5 months
+which results in the 31st of December.
+The resulting difference of -1 days is then assigned to the unsigned
+value `daysDiff`.
+
+This commit makes the minimal changes to remedy this bug.
+It makes sure to only ever call `AddMonths` with the same starting date
+instead of incrementally to different dates.
+
+fixes #552"
+"Fix type of m_openParenCount (#550)
+
+m_openParenCount is always used as unsigned and compared against unsigneds"
+"Update comment in scicomm.cpp (#549)
+
+While reading this part of code I had hard time understanding the
+comment, especially the misused `serious`. I tried rewording it
+slightly."
+Add missing override/final to CalculatorManagerDisplayTester (#551)
+Ensure gldPrevious is scoped to its own translation unit (#556)
+"Updating GraphingInterfaces to use Graphing Engine 2.0 (#561)
+
+* Updated Graphing Interfaces to version 2.0.1"
+"Added Calculator Standard Mode UI Tests (#501)
+
+- Added the CalculatorUIFramework to handle the WinAppDriver logic.
+- Added Standard Mode smoke tests and BVTs to the CalculatorUITests project.
+- Removed old UI tests that did not use the CalculatorUIFramework"
+Remove deprecated internal-only tests (#565)
+"Update to v142 build tools for Visual Studio 2019 (#548)
+
+* Update to build tools v142
+* Update official build pipelines to use VS2019
+* Update instructions to suggest updating to VS2019"
+"UI tests should be able to test both dev and store-released builds (#567)
+
+Fixes #462
+
+- Add x64 and x86 UI tests to the release builds (internal builds for the store)
+- UI tests now accept the target app ID as a parameter in the runsettings file"
+Create EquationTextBox control (#547)
+Modify ClipTime to adjust to local time before clipping (#558)
+Update to SDK 18362 (#568)
+"Ensure consistent margins/padding with currency converter keypad (#566)
+
+Simplifies the layout of `ConverterNumPad` to match that
+seen of `NumpadPanel` in Calculator.xaml by using the same
+static margin and removing the use of columns that had been used
+for dynamic margins.
+
+Fixes #87"
+"Date difference: display the difference in days (only) when we aren't able to calculate the difference in days/weeks/months.. (#555)
+
+* Display date difference in days if can't display in days/weeks/months/...
+
+* add comments
+
+* remove not used variable totalDaysDiff
+
+* improve UpdateDisplayResult
+
+* Display error message when the calculator can't calculate the difference between 2 dates"
+"Applying NR 1 to CalculatorVector.h (#491)
+
+Applied [NR 1](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#Rnr-top) from the ISO C++ Guidelines to CalculatorVector.h
+
+### Description of the changes:
+- Move towards understandable and maintainable code"
+"Merge master into feature/GraphingCalculator branch (#585)
+
+* Merge master into feature/GraphingCalculator branch"
+Use the current locale to sort country names (#259)
+"Removed need for trimIdx and fDigitsFound, resulting in less code. (#576)
+
+Having an extra integer variable to hold onto an i or i-1 value is inefficient, for ""if (m_token.at(i) != chZero)"", the code under ""fDigitsFound"" will always run, so it makes sense to put the fDigitsFound code under the if statement, which can return from the function entirely instead of breaking.
+
+### How changes were validated:
+- Manual Testing verified the code having identical behavior as before, with no side effects."
+"Make History and Memory list items context menu accessible using keyboard (#432)
+
+* Move History and Memory context menus to ListViewItemContainer so users can open them with keyboards
+
+* replace static_cast by dynamic_cast"
+"Use 2020 as the major version for the appxbundle (#586)
+
+Calculator's build number in release builds follows the pattern 10.{YYMM}.{build}.0. We use the build number in lots of places, including the app binaries, the app package version, and the app bundle version. Before Calculator moved to GitHub, the app bundle version was generated using a date-based formula which produced versions like ""2019.105.612.0"". This means that the bundles generated from GitHub have a lower version than previous bundles. This appears to cause some issues during device reset.
+
+This change sets the app bundle major version number to ""2020"" to ensure that newly-produced appxbundles have higher versions than legacy bundles. The remaining parts of the bundle version number will match the build number for easy reference.
+
+Also updating the MakeAppx version used in bundle creation to 18362."
+"Unit Converter - Calculate the rounding precision of results based on the source (#498)
+
+* precisely calculates the number of digits of the source and compute the number of significant digits of the result based on that.
+
+* fix unit test
+
+* Fix warning C4267
+
+* Optimize how we calculate the number of digits in the integer part and don't trim the value when used by the currency converter
+
+* modify GetNumberSignificantDigits
+
+* fix CI error
+
+* Access to wstring::npos from static calls
+
+* Move UnitConverter static methods related to number to NumberFormattingUtils
+
+* rename namespace
+
+* Add comment and fix typo
+
+* Move standard headers"
+"Updated Calculator diagnostic data collection per the specification (#572)
+
+- Removed unneeded diagnostic events and code
+- Added and consolidated events into the events defined in the spec"
+Fix 32-bit build (#588)
+Update version of release builds to 1907 (#590)
+Added Input pasted event and added to all modes (#593)
+Add variable editing (#581)
+"Modifying the title of the window to ""Calculator [Dev]"" (#531)
+
+* Modifying the title of the window to ""Calculator [Dev]"" when the build isn't configured with `IsStoreBuild`
+
+Fixes #439"
+"Fix #563: Odd dependency cycle (#570)
+
+There is an odd dependency in CalcEngine.
+
+`CalculatorManager` inherits `ICalcDisplay` and implements a set of virtual calls it exposes, in particular `SetPrimaryDisplay`.
+https://github.com/microsoft/calculator/blob/2517854836fee634a273adf3be72371cdb51ddaa/src/CalcManager/Header%20Files/ICalcDisplay.h#L13
+
+When setting a mode in `CalculatorManager`, e.g. https://github.com/microsoft/calculator/blob/2517854836fee634a273adf3be72371cdb51ddaa/src/CalcManager/CalculatorManager.cpp#L208
+`this` (here: an instance of `CalculatorManager`) gets passed as an argument to the newly created `CCalcEngine` as `ICalcDisplay` pointer and the engine is stored as `unique_ptr` member field of `CalculatorManager`.
+
+In the destructor of `CalculatorManager`, a single function is called, `MemorizedNumberClearAll` which then invokes `ProcessCommand(IDC_MCLEAR)` on current engine, gets passed on to `CCalcEngine::ProcessCommandWorker`, to `DisplayNum`, to `CCalcEngine::SetPrimaryDisplay` and finally to `m_pCalcDisplay->SetPrimaryDisplay`, but here `m_pCalcDisplay` _was_ the instance of `CalculatorManager` that just got its destructor called.
+
+https://github.com/microsoft/calculator/blob/2517854836fee634a273adf3be72371cdb51ddaa/src/CalcManager/CalculatorManager.cpp#L46
+https://github.com/microsoft/calculator/blob/2517854836fee634a273adf3be72371cdb51ddaa/src/CalcManager/CalculatorManager.cpp#L475
+https://github.com/microsoft/calculator/blob/2517854836fee634a273adf3be72371cdb51ddaa/src/CalcManager/CEngine/scicomm.cpp#L87
+https://github.com/microsoft/calculator/blob/2517854836fee634a273adf3be72371cdb51ddaa/src/CalcManager/CEngine/scicomm.cpp#L133
+https://github.com/microsoft/calculator/blob/2517854836fee634a273adf3be72371cdb51ddaa/src/CalcManager/CEngine/scidisp.cpp#L124
+https://github.com/microsoft/calculator/blob/2517854836fee634a273adf3be72371cdb51ddaa/src/CalcManager/CEngine/scicomm.cpp#L837
+
+It will likely differ by implementation on how exactly, but the [standard suggests](http://eel.is/c++draft/class.cdtor#4) that will invoke the pure virtual `ICalcDisplay::SetPrimaryDisplay`. In case of GCC I believe the vtable is already destroyed by the time you enter dtor's body.
+
+There appears to be no reason to call `MemorizedNumberClearAll` in `CalculatorManager::~CalculatorManager()` because the calc manager and all its engines are going down anyway.  Therefore, removing the call (and thus, the destructor which would then be empty).
+
+
+Fixes #563: Odd dependency cycle"
+"Fixed issue where UI Responsive events were not fired (#603)
+
+* Fixed the WindowIdLog so that it is updated when a new WindowCreated event is fired
+
+* Updated the windowidlog check in LogWindowCreated to use IsWindowIdInLog"
+"Restore user preferences (#456)
+
+### Description of the changes:
+**1) Do not set units to default values if they already have valid values** 
+This fixes the actual issue. `UnitConverter::InitializeSelectedUnits()` ( this function resets all units to their default units if available for the current category ) gets called after `UnitConverterViewModel::RestoreUserPreferences()` ( this function restores user preferences ).
+So Calculator has been restoring saved values, and then overriding the restored values with default values.
+I modified `InitializeSelectedUnits()` so that we only initialize units only when they are not already set to valid units for the current category.
+
+**2) Removed `m_isFirstTime`** 
+I noticed that we are calling `RestoreUserPreferences()`  twice when Calculator starts up, and the function is restoring the same value both times
+
+The below happens when Calculator starts up
+1) On startup, in `UnitConverterViewModel::InitializeView()`, `RestoreUserPreferences()` is called.
+2) `RestoreUserPreferences()` in turn triggers `OnUnitChanged()`
+3) During the first call to `OnUnitChanged()`, m_IsFirstTime is `True`, so we call `RestoreUserPreferences()` again while also setting `m_IsFirstTime` to `False`. 
+4) `RestoreUserPreference()` again triggers `OnUnitChanged()`
+5) During the second call to `OnUnitChanged()`,  m_IsFirstTime is `False`, so we call `SaveUserPreferences()`
+
+I think we should only call `SaveUserPreferences()` inside `OnUnitChanged()` since we already restored user preferences during view initialization. I can't really think of a reason to restore units after view has been initialized. This led me to just delete `m_isFirstTime`.
+
+
+### How changes were validated:
+Manually tested that units and the current category are properly selected when you quit and start Calculator.
+
+![GifMaker_20190414182150911](https://user-images.githubusercontent.com/3166423/56102706-88f73400-5ee3-11e9-8bbf-7a0c8e051a5c.gif)
+
+![GifMaker_20190414183403644](https://user-images.githubusercontent.com/3166423/56102763-f0ad7f00-5ee3-11e9-99ef-3b932f587393.gif)
+
+## Fixes #445."
+Always-on-Top mode implemented (#579)
+"Currency rate: always display minimum 4 significant decimals or 2 trailing zeros if the number is integer (#256)
+
+* Currency rate: Compute how many decimals we need to display two meaningful digits at minimum
+
+* formatting
+
+* nit
+
+* Increase the number of meaningfull digits (2->4)
+
+* Revert ""Increase the number of meaningfull digits (2->4)""
+
+This reverts commit 9ad93e0d591a386e3e229e09b39a58158d544069.
+
+* Rename constants
+
+* modify FORMATTER_RATE_* values
+
+* format CurrencyConverterUnitTests.cpp"
+Fix the thumbprint of the certificate in the vcxproj file (#617)
+"Updated README to note the requirement for installing WinAppDriver (#624)
+
+- Our documentation should make it clear to contributors what the expected developer
+  environment is in order for the project to work.  In this case, a user tried to run the UI
+  tests, unaware that they needed WinAppDriver installed on their machine.  This updates
+  the README to indicate that requirement.
+- Trailing spaces from other parts of the document were also removed as part of this change
+
+Fixes #621"
+"Prevent Dev title from showing up on Store builds (#627)
+
+Commit 0722781fc updated the app to use `DevAppName` for the
+app's window title when it was a non-official build, based on
+the state of `IsStoreBuild`.
+
+Unfortunately, `IsStoreBuild` is a _project_ level variable defined in
+[build-app-internal.yaml](https://github.com/microsoft/calculator/blob/0722781fc60565938da42ea252766b30d02e5fb5/build/pipelines/templates/build-app-internal.yaml#L36),
+but not a _compile-time_ defined value.
+
+To solve this, we are now defining `IS_STORE_BUILD` in
+`Calculator.vcxproj` when `IsStoreBuild='True'`, the same way that
+we set `SEND_DIAGNOSTICS` for official builds, and we'll change the
+window title based on that new `#define`.
+
+Using this new `#define` can lead us down a slippery slope.  We need to
+limit the amount of divergent code that we have between dev/official
+builds.  This should be hopefully one of very few instances where
+this value is ever used."
+Fixes Always-on-Top crashes (#626)
+Update localized strings 2019-08-08 (#636)
+"Adding share functionality to Graphing Calculator (#601)
+
+* Plumebd with data transfer
+
+* Getting mainpage to talk to getbitmap.  moving share callbacks from mainpage to graphingcalculator
+
+* Trying to get bitmap from renderer.
+
+* work
+
+* Share worked
+
+* cleanups
+
+* Cleanups progressing
+
+* Share working, need loc for title string and user notification incase of a failure.  Then add the equations key.
+
+* More cleanup, now using share icon image and resources for strings.  Still need to do the graph equation key.
+
+* Change share to html based start.
+
+* Key working, with UL but going to try changing to table.
+
+* Fix a html formating error, generating a new UL for each equation.
+
+* Switched over to a table for equation key and have color block formating
+
+* Updates from PR feedback, using Graphing::IBitmap abstraction.
+
+* Update src/Calculator/Views/GraphingCalculator/GraphingCalculator.xaml.h
+
+Fixed
+
+Co-Authored-By: Pepe Rivera <joseartrivera@gmail.com>
+
+* PR Updates.
+
+* Add variables to the graph key.
+
+* PR Updates."
+Adds zoom buttons to graph controls (#637)
+"Fix regression bug with application title no longer grayed out. (#632)
+
+Move back the VisualStateManager node to the root XAML element to fix visual states of the titlebar.
+
+### How changes were validated:
+- Manually
+
+Fixes #631"
+"Remove unused expression item template selector (#623)
+
+* remove unused AlwaysOnTopExpressionItemTemplateSelector
+
+* replace incorrect ThemeResource by StaticResource references"
+Remove colorize and fullcolor app list icons (#644)
+"General improvement of the title bar for Always-On-Top. (#634)
+
+* Make sure TitleBar takes into account the AOT mode change
+
+* remove namespaces in cpp files
+
+* code linting
+
+* use macro for IsAlwaysOnTop and make IsAlwaysOnTop/DisplayNormalAlwaysOnTopOption read-only
+
+* Fix FontWeight"
+"Optimize BitFlipPanel to suppress flicker when users switch between bit lengths (#640)
+
+* Optimize BitFlipPanel
+
+* remove namespace in cpp file
+
+* improve localization + add tests
+
+* add helper to compare ivector
+
+* Modify how the control manages AutomationProperties::Name"
+Update internals package to 0.0.18 (#645)
+"Update documentation for communicating discovered security vulnerabilities (#657)
+
+Aligning to recently published common SECURITY.md file available at
+https://github.com/microsoft/microsoft.github.io/blob/master/SECURITY.MD"
+Remove ProgModeRadixChange unload (#641)
+Updated Win UI to 2.2 for Calculator and CalcViewModel projects (#658)
+"Replace AppChromeAcrylicHostBackdropMediumLowBrush from OverflowTextBlock + improvements (#647)
+
+* replace acrylic brush by margin/padding
+
+* Modify how the control manages the focus
+
+* remove comment
+
+* Prevent deadlock"
+Merge master into feature/GraphingCalculator branch (#660)
+"Update app version to 1908 (#661)
+
+* Update app version to 1908
+
+* Update app versionMinor to 1908"
+"Fix scroll buttons in CalculationResult (#652)
+
+* Fix scroll buttons of CalculationResult
+
+* Unregister click events
+
+* Add comment"
+"Move unit test runs to hosted pools (#671)
+
+We can now run our unit tests in the Hosted VS2019 pool since bugs have been fixed in the version of Visual Studio deployed on those agents."
+"Add copy button to history menu item context menu (#628)
+
+Adds a Copy button to the context menu for history menu items located above the delete button in the menu. Copy only copies the result and not the entire content of the history item (equation and result).
+
+Fixes #429"
+Disable ProgrammerRadixOperators when not visible
+"Prevent the history panel to be displayed when using the Programmer mode (#676)
+
+Be sure we don't display the panel when the current view is the Programmer mode.
+
+Fixes #665"
+"Switch to RichEdit math mode in EquationTextBox (#672)
+
+* Use RichEdit Math Mode
+
+* Add comment
+
+Co-Authored-By: Stephanie Anderl <46726333+sanderl@users.noreply.github.com>"
+Update color picker (#668)
+"Do not collapse Update Rates button in a transient state (#619)
+
+* Do not collapse Update Rates button in a transient state
+
+* Address PR feedback and add animation to everything affected by IsCurrencyLoadingVisible"
+Updated signature which VS 2019 is actually enforcing (#681)
+"Modify how narrator names the first and last bits of a number in Bit Flip (#675)
+
+* Replace 0th by ""least significant bit""
+
+* Add support of Most Significant Bit
+
+* Fix issue with narrator not updating text of some bits"
+"Code cleanup: simplify NarratorNotifier (#646)
+
+Now that the RaiseNotificationEvent API is available on all platforms where the Calculator app runs, we can remove the factory classes which switched between RaiseNotificationEvent and an alternative implementation based on live regions."
+"Update Calc Engine for new functions needed for keyboard refresh (#662)
+
+* Update Calc Engine to Support New Functionality
+
+* Address PR comments
+
+* Address PR comments"
+Update Calculator keyboard for greater consistency and extensibility (#688)
+"Passive & Active tracing (#638)
+
+* Plumebd with data transfer
+
+* Getting mainpage to talk to getbitmap.  moving share callbacks from mainpage to graphingcalculator
+
+* Trying to get bitmap from renderer.
+
+* work
+
+* Share worked
+
+* cleanups
+
+* Cleanups progressing
+
+* Share working, need loc for title string and user notification incase of a failure.  Then add the equations key.
+
+* More cleanup, now using share icon image and resources for strings.  Still need to do the graph equation key.
+
+* Change share to html based start.
+
+* Key working, with UL but going to try changing to table.
+
+* Fix a html formating error, generating a new UL for each equation.
+
+* Switched over to a table for equation key and have color block formating
+
+* Updates from PR feedback, using Graphing::IBitmap abstraction.
+
+* Update src/Calculator/Views/GraphingCalculator/GraphingCalculator.xaml.h
+
+Fixed
+
+Co-Authored-By: Pepe Rivera <joseartrivera@gmail.com>
+
+* PR Updates.
+
+* Add variables to the graph key.
+
+* eod
+
+* Passive graph value tracing working.
+
+* Basic active tracing cursor working.
+
+* Move active tracing from graphingcalculator to grapher to save some hops.
+Also block tracking of the active tracing key's when in the EquationTextBox.
+
+* Active tracing working, need to put button on screen for activation.
+
+* Added active tracing control button (placeholder image)
+
+* Eod
+
+* Popup trace value now tracks the highlighted point.
+
+* Popup skined
+
+* PR Updates.
+
+* Update certificate thumbnail so VS2019 doesn't have a build error.
+
+* PR comments in process.
+
+* PR Updates
+
+* PR Updates, change tracing value to use tooltip static resource so we automatically change depending on system values.  And changed text formatting of the value to be generic (x,y) value.
+
+* PR updates, changed how we detect who has focus so we don't eat keys when not in active tracing.
+
+* Additional filtering for the Key Up/Down in the grapher."
+"Added new dev app icons and update version to 1909 (#705)
+
+* Added new dev app icons
+
+* Removed VS added page include in calculator.vcsxproj.filters and increased the internal version number and the app version number"
+"Fix the focus when right-clicking CalculationResult's TextBlock (#698)
+
+* Fixed issue with focus when right-clicking result
+
+* Using dynamic_cast in place of safe_cast"
+"Active tracing (#702)
+
+* Plumebd with data transfer
+
+* Getting mainpage to talk to getbitmap.  moving share callbacks from mainpage to graphingcalculator
+
+* Trying to get bitmap from renderer.
+
+* work
+
+* Share worked
+
+* cleanups
+
+* Cleanups progressing
+
+* Share working, need loc for title string and user notification incase of a failure.  Then add the equations key.
+
+* More cleanup, now using share icon image and resources for strings.  Still need to do the graph equation key.
+
+* Change share to html based start.
+
+* Key working, with UL but going to try changing to table.
+
+* Fix a html formating error, generating a new UL for each equation.
+
+* Switched over to a table for equation key and have color block formating
+
+* Updates from PR feedback, using Graphing::IBitmap abstraction.
+
+* Update src/Calculator/Views/GraphingCalculator/GraphingCalculator.xaml.h
+
+Fixed
+
+Co-Authored-By: Pepe Rivera <joseartrivera@gmail.com>
+
+* PR Updates.
+
+* Add variables to the graph key.
+
+* eod
+
+* Passive graph value tracing working.
+
+* Basic active tracing cursor working.
+
+* Move active tracing from graphingcalculator to grapher to save some hops.
+Also block tracking of the active tracing key's when in the EquationTextBox.
+
+* Active tracing working, need to put button on screen for activation.
+
+* Added active tracing control button (placeholder image)
+
+* Eod
+
+* Popup trace value now tracks the highlighted point.
+
+* Popup skined
+
+* PR Updates.
+
+* Update certificate thumbnail so VS2019 doesn't have a build error.
+
+* PR comments in process.
+
+* PR Updates
+
+* PR Updates, change tracing value to use tooltip static resource so we automatically change depending on system values.  And changed text formatting of the value to be generic (x,y) value.
+
+* PR updates, changed how we detect who has focus so we don't eat keys when not in active tracing.
+
+* Additional filtering for the Key Up/Down in the grapher.
+
+* Fix bug where active tracing would turn back on after clicking button to turn it off."
+"fix 505 (#710)
+
+* fix 505
+
+* Update CalcErr.h
+
+Updated to have line of code changed to be right below the comment referring to line of code. (Line 45-44)"
+"Add E-notation support to CopyPasteManager for standard mode (#687)
+
+* Add scientific notation support to CopyPasteManager for standard mode
+
+* improve c_signedDecFloat to ignore '.'
+
+* fix c_signedDecFloat"
+add fallback colors to RevealBrush missing them (#685)
+Modify how the Calculator control manages the focus (#686)
+Allow users to paste expressions with ^or % (#682)
+"Do not hide expression when user presses Enter or = (#695)
+
+* #653 Do not hide expression on EQU operation
+
+* #653 Clear expression, when user makes an action
+
+* #653 Fixed UI tests
+
+* #653 Review fixes"
+"Updating CalculatorHistory to use a default destructor. (#723)
+
+Its memory will be cleaned up by std::vector's destructor."
+Update localized strings 2019-10-21 (#724)
+"Update release pipeline to use newer StoreBroker tasks (#727)
+
+Updating the release pipeline to use the newer StoreBroker v2 tasks
+for automated deployment to the Store.
+
+Must rev the version of the internals package in order to get the
+latest version of the PDP files and config file."
+"Fix release pipeline yaml (#733)
+
+There were two issues:
+
+* The indentation for the PowerShell script task was off,
+  causing a parsing error
+* The flighting task needed to be named so that the Aero
+  task would be able to reference its output variable."
+Allow negative numbers without digits before the decimal point (#743)
+"Remove unnecessary dependencies from UITestFramework project (#745)
+
+The CalculatorUITestFramework project does not need Microsoft.NET.Test.Sdk or MSTest.TestAdapter. These dependencies are needed only in the project which produces the actual test assembly (in our case, the CalculatorUITests project).
+
+Removing these resolves a build warning, since the test adapter package does not target .NET Standard."
+use short date (#739)
+make ControlSizeTrigger works even if the control is already loaded (#738)
+"Replacing CalculatorVector usage with std::vector (#756)
+
+* Replacing CalculatorVector usage with std::vector
+
+Assumptions made here are that memory allocations
+are not recoverable.  If it can be proved that an index
+will be in range, then the indexing operation is used.
+If not (without manual checks) the std::vector::at function
+is used to throw an exception in case of a programmer bug.
+
+* Changes based on PR feedback
+
+Using auto& in CalculatorCollector::UpdateHistoryExpression
+so the token.first value is properly updated.
+
+Using range for loop to GenerateExpressions.
+
+Setting isEditable directly to the result of boolean expression.
+
+Using token.second directly instead of creating a
+separate tokenCommandIndex variable.
+
+* Fixing issue with generating expressions strings.
+
+A space should not be added before the first item."
+"Making string concatenations more efficent (#760)
+
+by appending wchar_ts instead of  wstrings"
+"Remove AsyncHelper, Resource and Module.cpp from CalculatorUnitTests project. (#746)"
+Add KeyboardAccelerators for AlwaysOnTop (#734)
+Enable code analysis in the CalcManager project (#689)
+Replace wstring used in public methods by Platform::String in CalcViewModel (#758)
+"Revert ""Replace wstring used in public methods by Platform::String in CalcViewModel (#758)"" (#767)
+
+This reverts commit 93f1f784bb4ba5235dfbf1dd140a2c62001bfbfb."
+Replace wstring used in public methods by Platform::String in CalcViewModel (#768)
+"Modify how Calculator manages the visibility of the History button (#712)
+
+* Modify how Calculator manages the History button + code cleaning
+
+* remove extra include"
+Fix crash and high contrast (#773)
+fix DateDifference::operator== (#762)
+Fix the right arrow button of CalculationResult not disappearing in some cases (#736)
+Migrate TraceLogger to runtime class (#772)
+Convert DateCalculatorViewModel to runtime class (#769)
+"Updating StandardCalculatorViewModel to use algorithms (#776)
+
+- Using default wstring constructor instead of taking empty string literal
+- Updated to for range-for where appropriate
+- Used std::find for IsOp* code that was doing it by hand
+- Used std::count to calculate LengthWithoutPadding
+- Used existing wstring constructor to pad a string"
+Fully separate Calculator and CalcManager (#752)
+use Command instead of int to represent a command id (#781)
+Updating code to append a wchar_t instead of const wchar_t (#778)
+"Update build version to 1910 (#786)
+
+updating minor versioning to 1910 release"
+Added Copyright headers to .cpp and .h files (#790)
+force a call to m_expressionContainer->Measure in UpdateScrollButtons (#750)
+"Key graph features (#704)
+
+* Added IGraphAnalyzer
+
+* Key Graph Features called and getting returned to the client. To do put all strings into the Equation object
+
+* Updated UpdateKeyGraphFeatures to add function analysis data to all properties in Equation object
+
+* Update KGF when variables are updated
+
+* Key graph features ui started
+
+* Added MathRichEditBox and started hooking up key graph features to the UI
+
+* Updated EquationViewModel to include parity and periodicity
+
+* Updated key graph features to update the EquationViewModel
+
+* updated key graph features to display more values
+
+* Key graph features populating uing MathRichEdit mode
+
+* moved KeyGraphFeatures control to GraphingCalculator.xaml
+
+* Use MathML formatting instead of MathRichEdit for strings passed back from the engine
+
+* cleaned up project targeting and equation.h comments
+
+* Updated equation edit box to populate for KeyGraphFeatures
+
+* Fixed vcxproj files to have the correct targeting and certificates. KGF Title strings moved to x:Uid instead of the code behind
+
+* Updated per PR feedback
+
+* Update MathRichEditBox to detect if the string is a mathml string and use the appropriate set method to set the text
+
+* fixed the issue where parity, periodicity and monotonicity could be set with an old value if the next one is empty
+
+* KGF control UI adjustments and error handling
+
+* Error control updates
+
+* Error handling added when analysis fails
+
+* fixed alignment on rich edit boxes
+
+* Add monotonicity direction into the mathml string and only have 1 richeditbox
+
+* Set hover state on KGF EquationEditBox to change button opacity and fixed spacing in Monotonicity RichEditBox
+
+* remove sideload package certificate info VS added
+
+* updated logic for setting error strings to be in the viewmodel
+
+* Updated KeyGraphFeatures to populate dynamically using a ListView and TemplateSelector
+
+* Update periodicity to not show if it isn't supported
+
+* Fixed issue where y-intercept was using the x-intercept value
+
+* Remove ItemsControl ItemsContainerStyle
+
+* Updated per pr feedback. Fixed bug where analysis error would not reset
+
+* Update MathRichEdit box to remove selection when focus is lost
+
+* Updated mathrichedit to get LAF access for Dev, Release and Graphing projects
+
+* Remove OnLostFocus in MathRichEdit, Change KGF ItemsControl back to ListView
+
+* Clean up styles for KGF and ensure the match the comps
+
+* Moved formatoptions logic to the Grapher constructor and reverted LineColor.Text resource that was mistakenly taken out
+
+* Add copyright header to KGF Files
+
+* fixed issue where asymptote values were not populating
+
+* Disable KGF button when there is no equation. Fixed issue where equation populated in a new equationtextbox after the previous one was deleted
+
+* Removed formatoptions testing lines used for debugging"
+Run localization pipeline on the Hosted Windows 2019 pool (#794)
+Fix focus for EquationTextBox (#787)
+"Convert CopyPasteManager to runtime class (#766)
+
+* Convert CopyPasteManager to runtime class
+* merge AssertUtils and Helpers.h
+* update onpastemanager"
+Use only NumberBase to represent radix in CalcViewModel (#797)
+Modify the declaration of some properties of StandardCalculatorViewModel to make them read-only and use macros (#799)
+Updating RemoveUnwantedCharsFromString to be a template (#808)
+"Fixing typo in StandardCalculatorViewModel::UpdatecommandsInRecording… (#810)
+
+* Fixing typo in StandardCalculatorViewModel::UpdatecommandsInRecordingMode
+Removing unnecessary copy of vector in StandardCalculatorViewModel::UpdateCommandsInRecordingMode
+Using range-for in StandardCalculatorViewModel::UpdateCommandsInRecordingMode
+
+* Using static_cast instead of safe_cast for unsigned char to Command"
+"Update share output (#782)
+
+* fix share bugs
+
+* PR feedback
+
+* PR feedback and merge fix
+
+* Fix spacing and use explicit break
+
+* Fix extra space"
+"Update styles for buttons on Graph and ListView (#793)
+
+* Fix listview
+
+* extra merge with KGF
+
+* Few tweaks
+
+* Fix scrolling
+
+* PR feedback and other tweaks
+
+* Update src/Calculator/Views/GraphingCalculator/EquationInputArea.xaml
+
+Co-Authored-By: Stephanie Anderl <46726333+sanderl@users.noreply.github.com>"
+"Refactor Equation to be treated as a model and update Key Graph Features (#791)
+
+* refactor code
+
+* update KGF
+
+* Rename some functions
+
+* Undo comment out of proj file
+
+* Pr feedback"
+"Equation button updates: Enable/Disable on click, button content f1, f2, f3..., visibility icon on hover (#804)
+
+* Added enable/disable line functionality
+
+* Update EquationTextBox to change the opacity of functions have are not visible. Update the function label for the EquationTextBox to increment the label to show f1, f2, f3, etc
+
+* rebase key-graph-features and fix issue where removing an equation box and adding a new one repopulates the previous equation
+
+* Added visibility icon for the equation button hover
+
+* updated EquationButton to be a toggle button to better handle the LineHidden state and other PR comment fixes.
+
+* Updated EquationButton style to use a toggle button and to have placeholder icons for the show/hide states
+
+* Updated equation button after pulling the refactor work into the branch. Fixed the Equation Button in KGF UI
+
+* Fixed Pepe's bugs
+
+* Uncomment temporary.pfx in calculator.vcxproj"
+Changing CalculatorManager::GetSavedCommands to return a const ref (#812)
+"Added support for small windows in the graphing calculator (#803)
+
+* Add support of small windows
+
+* remove extra space
+
+* Modify how we manage the tooltip
+
+* Fix merge issues"
+"Add tooltips to buttons in graphing calculator (#822)
+
+* Add tooltips to buttons in graphing calculator
+
+* Fix break due to bad merge
+
+* CR Feedback"
+"Modify how we manage the visibility of the history button (#821)
+
+* Modify how we manage the visibility of the history button
+
+* rename function"
+Hide the Edit Variables button when no variables are available (#823)
+Changing CCalcEngine::s_engineStrings to use string_view for keys (#829)
+"Updating HistoryViewModel::SaveHistory so it (#819)
+
+Taking a const ref of history items vector in HistoryViewModel::SaveHistory and iterating over those items using a range for loop."
+Enable PR and CI builds for feature branches (#838)
+Enable PR and CI builds for feature branches (#838) (#839)
+Merge remote-tracking branch 'upstream/master' into feature/UpstreamGraphingCalculator
+merge with master
+Add missing brush
+Enable PR and CI builds for feature branches (#838)
+Build GraphingCalculator against SDK 18362 (#841)
+Change GraphingCalculator package identity back to WindowsCalculator.Dev (#843)
+"Add error handling to graph and equations (#827)
+
+* add error handling
+
+* Handle regraphing on certain errors
+
+* Fix high contrast
+
+* Hide KGF button in error state"
+Update navigation unit tests to account for new graphing calc entry point position (#844)
+"Add icons for show, hide and switch to equation mode (#845)
+
+* Add icons for show, hide and switch to equation mode
+
+* use correct icon for small mode
+
+* cleanup of fonts"
+Build and test x86 in PR builds (#846)
+"Adding automation names to buttons (#842)
+
+* Add missing automation names for buttons in graphing calculator
+
+* Add narrator support for tracing features"
+"Update ManualTests.md (#815)
+
+* Update ManualTests.md
+
+Added manual test cases for Graphing mode in Calculator.
+
+* Update ManualTests.md
+
+Added line breaks to make my additions more legible, and added two more cases for testing the ""too complex"" and ""unsupported"" error messages for Key Graph Features."
+Hide or Disable graphing calculator menu item when necessary (#848)
+Fix crash with x86 (#853)
+Add keyboard UI (#855)
+"Add context menu to rich edit to allow for keyboard support (#854)
+
+* Add context menu to rich edit to allow for keyboard support
+
+* Update src/Calculator/Controls/EquationTextBox.cpp
+
+Co-Authored-By: Pepe Rivera <joseartrivera@gmail.com>
+
+* Check for focus before triggering submit"
+"Fix graph rendering of inequalities (#856)
+
+* fix inequality rendering
+
+* Add comment"
+Refactoring LocalizationSettings (#850)
+"[Graph] Replace the Add button by a EquationTextBlock (#826)
+
+* init
+
+* Replace the Add equation button by an EquationTextBox
+
+* Move automatically the focus to the next textbox when users press Enter
+
+* nit
+
+* localize the placeholder
+
+* rebase
+
+* rebased and disable remove context menu when the equation is the last one
+
+* replace storyboards by setters in visual states"
+Removing unused serialization code in CalculatorManager (#858)
+"Update GraphingCalculator Projects to allow official builds (#852)
+
+* renamed MockGraphingImpl to GraphingImpl, updated the nuget.config to include the WindowsApps feed
+
+* Revert nuget.config change
+
+* Updated vcxproj files to output to the same directory regardless of configuration
+
+* Removed outder used GenerateProjectSpecificOutputfolder instead
+
+* revert commenting out the temporary.pfx cert in the calculator.vcxproj file"
+"Redesign graph buttons + replace ActiveTracing button by a ToggleButton (#864)
+
+* redesign graph buttons
+
+* fix high-contrast and focus"
+"Fix some UI bugs in graph mode (#862)
+
+* Address issues with error states
+
+* Add various fixes
+
+* Add back initial tooltip
+
+* PR comments"
+"Move variables to the right column (#859)
+
+* move variable editor
+
+* support high contrast and tab navigation
+
+* Remove obsolete resources
+
+* take feedback into account
+
+* Fix focus when virtualization recycle a EquationTextBox
+
+* formatting"
+"GraphControl: refactoring and optimizations (#831)
+
+* GraphControl cleaning
+
+* replace textbox value after submission
+
+* rebase
+
+* rebase
+
+* rebase
+
+* Add filters
+
+* rebase!
+
+* rebase"
+"Save and restore the value of EquationInputArea when users scroll (#866)
+
+* Save and restore the value of EquationInputArea when users scroll
+
+* clean up
+
+* replace ->Focus(..) by FocusManager::TryFocus(...)"
+Fix focus issues (#868)
+"Update graph tooltip design and content (#867)
+
+* update graph tooltip
+
+* modify font size"
+"Remove EquationTextBox from KeyGraphFeaturesPanel (#833)
+
+* remove EquationBox from KFG
+
+* polish
+
+* improve templates
+
+* fix issue with dark theme and MathRichEditBox"
+Cleaning up some UnitConverter code and making some of it more efficient. (#875)
+Removing call to stripzeroesnum if no number exists. (#877)
+support ctrl+- and + (#882)
+Using wstring instead of wstringstream where appropriate (#881)
+"Wire up keyboard in graphing calculator (#863)
+
+* Wire up graphing calculator keyboard with math rich edit control
+
+* CR feedback
+
+* Handle focus bug in flyout"
+"High Contrast support for Graphing Calculator (#878)
+
+* Equation Control - High contrast
+
+* tweak
+
+* Update graph colors when users switch from one high contrast mode to another
+
+* decrease opacity of reveal borders"
+Fix prefix 0s after deleting decimal point (#825)
+Update build year in Aboutflyout (#895)
+"Minor changes to share output (#886)
+
+* Make some tweaks to share output
+
+* adjust strings
+
+* one more tweak
+
+* Remove unneeded span"
+"Change active tracing to use correct glyph instead of dot (#890)
+
+* Change active tracing to use correct glyph instead of dot
+
+* make the pointer on the glyph line up correctly"
+Add Graph Settings (#879)
+"Prevent the graph to pan/zoom in some cases (#897)
+
+* prevent the graph to change ranges when hide/show an equation or change the trig unit
+
+* make sure to not zoom/pan when we hide the last visible equation"
+Update equation colors (#885)
+Using wstring::find_last_not_of in CalcManager::NumberFormattingUtils::TrimTrailingZeroes (#898)
+Wstring view overrun (#884)
+Take windows setting into account to Disable/Enable animations (#748)
+Merge remote-tracking branch 'upstream/feature/GraphingCalculator' into mergeFeature
+Fix filters from bad merge
+remove the useless code related to the management of the focus in CalculationResult (#700)
+Add condition to unit tests to handle cases where graphing calculator is hidden
+Updated internal build version to 0.0.31 (#900)
+Code cleaning: Remove all properties/functions not used in CalculationResult (#649)
+More Unit tests fixes for when graphing calc is not enabled
+One more unit test fix
+"CalcViewModel code cleaning (#754)
+
+* move KeyboardShortcutManager, ValidationConverter and ViewState to Calculator
+* remove dead code listed in #753
+* remove Microsoft.UI.Xaml nuget package from CalcViewModel"
+Merge remote-tracking branch 'upstream/master' into mergeFeature
+"Remove ARM64 from the package since Graphing mode does not support AR… (#903)
+
+* Remove ARM64 from the package since Graphing mode does not support ARM64.
+
+* Update build/pipelines/templates/package-appxbundle.yaml
+
+Steph approves :)
+
+Co-authored-by: Eric Wong <eriwong@microsoft.com>"
+Fix build as a result of merge conflict
+"Merge pull request #899 from EriWong/mergeFeature
+
+Merge graphing calculator into master"
+"Add preview tag to Graphing feature (#907)
+
+* Add preview tag to Graphing
+
+* Fix Graph Settings button in dark mode"
+Removing wstringstream usage since it adds unnecessary overhead (#908)
+Change Calculator app name back to Calculator and add more margin to the preview tag for graphing mode (#909)
+"Fix crash when setting graph options to very large numbers (#904)
+
+* fix crash
+
+* Fixes
+
+* Update build/pipelines/templates/build-app-internal.yaml
+
+Co-Authored-By: Stephanie Anderl <46726333+sanderl@users.noreply.github.com>
+
+Co-authored-by: Stephanie Anderl <46726333+sanderl@users.noreply.github.com>"
+"Update toggle to switch from graph to equations (#912)
+
+* Modify toggle to switch from graph to equations
+
+* support RtoL languages
+
+* fix margin"
+Removing unnecessary string copies when iterating vectors and maps in KeyGraphFeaturesInfo (#915)
+Inferring std::array template params for featureLevels. (#917)
+Fix function symbols in RtoL (#914)
+ui changes (#920)
+"Format MathML equations before submission to the GraphControl (#926)
+
+* Format richedit input
+
+* fix spelling error"
+Remove LimitedAccessFeatures check for old package name (#921)
+"Update group policy check to look in HKCU instead of HKLM for allowing graphing mode (#918)
+
+* Update group policy check to look in HKCU instead of HKLM
+
+* Update the dwFlags to use RRF_RT_DWORD."
+"Update Font Sizes for Graph Settings and Key Graph Features to be aligned (#923)
+
+* Updated fonts for Graph Settings to match KGF
+
+* Update graph settings font sizes to be a bigger
+
+* Update KGF fonts to match Graph Settings"
+"Adjustments to ghost textbox (#924)
+
+* adjustments
+
+* delete extra visual states
+
+* Fix hover bug
+
+* Fix a few more bugs
+
+* Fix high contrast crash"
+"Use path instead of glyph for active tracing (#910)
+
+* Use path instead of glyph"
+Removing useless code from VisualTree::FindDescendantByName (#925)
+"Make variable boxes collapsible on click (#916)
+
+* fix
+
+* PR comments
+
+* fix bug
+
+Co-authored-by: Eric Wong <eriwong@microsoft.com>"
+Fix release pipeline by setting provData to false (#929)
+"Update KGF Back Button Styling (#927)
+
+* Remove rounded corners on the back button
+
+* Updated back button style to align with Equation button.
+
+* Fixed issue where the forground color was white in high contrast and fixed the crash in high contrast"
+Update release yaml to remove arm64 builds (#930)
+fix bugs (#934)
+Removing Utils::Swap and using std::swap instead (#932)
+"Making a few improvements in Grapher (#922)
+
+- Removed unused variable
+- Using ArrayReference in GetGraphBitmapStream so bytes aren't copied an extra time"
+Fixing CalculatorManagerTests by setting calculator mode so CCalcEngine is set. (#940)
+"Fix graphing crash when plotting equations with errors (#958)
+
+* fix crash
+
+* Fix follow up crash
+
+* real fix"
+"Updated unit tests certificate (#971)
+
+* Updated unit tests certificate
+
+* Remove the user macros section since the certificate is already in the global section of the vcxproj"
+Update Calculator MDL2 Font(#972)
+"Always on top tool tip (#968)
+
+* First implementation of KeyboardAccelerators for OnTop
+
+* Changed shortcut keys to match the specs
+
+* Adjusted ToolTips for compact overlay buttons to show the KeyboardAccelerator"
+"Fix focus bug in graphing mode and other small changes (#938)
+
+* Fix some bugs
+
+* Style fixes from prev PR"
+Update build version to 2001 (#1016)
+"Enables analysis on functions with variables (#1021)
+
+* Add Graph Options to enable analysis with variables
+
+* Remove debugging call to GetAllowKeyGraphFeaturesForFunctionsWithParameters()
+
+* Updated the variable analysis logic to use the UpdateGraphOptions method"
+"Allow rendering the graph on a background thread (#1014)
+
+* Render on background thread
+
+* More work
+
+* variable fix
+
+* Add comments"
+Making Graphing::Color fully constexpr (#1010)
+Update mocks (#967)
+"Update the CI build to only run p0 UI tests for PRs and all UI tests for rolling CI builds (#1012)
+
+* Added testcasefilter to the UI tests yaml
+
+* Set priorities on UI tests
+
+* Add UI tests for PRs yaml file, conditionally add it to the CI build yaml
+
+* Update priority on functional tests
+
+* Use a conditional task input instead of an additional yaml file to determine if UI tests should be filtered to P0 only
+
+* Add condition:succeeded() back into the run-ui-tests.yaml
+
+* Add back line
+
+Co-authored-by: Matt Cooley <matt@mattcooley.net>"
+Fix ARM64 build (#1026)
+"Rename icons to new format and update internals package (#1028)
+
+* Rename asset files
+
+* Add missing files
+
+* Exclude references to assets that don't exist
+
+* Update internals version"
+"Update Standard Mode Calculator UI Tests (#788)
+
+
+Additional Standard mode UI Tests added."
+"No need to make an enum variable if it is either one of two possibilities. (#1036)
+
+Visibility variable holding collapsed but then turning into visible is unnecessary when one can return Visibility::Collapsed or Visibility::Visible."
+"Remove unneeded assets (#1038)
+
+* remove fun assets
+
+* PR comments"
+"Fix crash when tabbing through KGF (#1037)
+
+* Check readonly
+
+* Update src/Calculator/Controls/MathRichEditBox.cpp
+
+Co-Authored-By: Rudy Huyn <rudyhuyn@gmail.com>
+
+Co-authored-by: Rudy Huyn <rudyhuyn@gmail.com>"
+share image (#1039)
+Make unit converters stil working when users opened 'Currency' in offline mode (#1022)
+"Delay loading some unused UI elements (#1042)
+
+* unload
+
+* pr fixes"
+"Fix usability issues with settings flyout (#1049)
+
+* various settings fixes
+
+* PR fixes"
+"Fix some accessibility bugs (#1047)
+
+* Fix accessibility bugs
+
+* style fix"
+Pass EquationButtonContentIndex for show equation tooltip (#1057)
+"Update Analysis after variables change (#1056)
+
+* Updated Analyze Equation to set the current value of the variables before analysis
+
+* Updated SetGraphArgs to take in a graph parameter and use it in AnalyzeEquation()"
+Handle focus for clear and clearentry buttons (#896)
+Parse each individual equation (#1059)
+Push back if the vector is a whimsical (#1062)
+"Support other locales for decimal and list separators (#1060)
+
+* Support other locales for decimal and list seperators
+
+* PR fixes"
+Allow copying graph as image (#1051)
+"Add automation name to graph control (#1032)
+
+* fix bugs
+
+* Update src/Calculator/Resources/en-US/Resources.resw
+
+Co-Authored-By: Rudy Huyn <rudyhuyn@gmail.com>
+
+Co-authored-by: Rudy Huyn <rudyhuyn@gmail.com>"
+Update internal package vers (#1076)
+Add reset button to settings flyout (#1073)
+Check for ctrl when navigating to handle AltGr (#1054)
+Fix analyze button being enabled with error (#1061)
+"Work around crash by replacing ItemRepeater with ListView (#1058)
+
+* Replace ItemRepeater with ListView
+
+* Allow animations
+
+* undo temp key change
+
+* Remove animation"
+Update the EquationInputArea divider line to update with the app theme (#1084)
+"Support regular textbox context menu functions in the EquationTextBox (#1065)
+
+* Add context menu items back
+
+* Disable if no selection"
+"Select the equation when the EquationTextBox has focus and during analysis (#1067)
+
+* Select equation on focus
+
+* PR comment"
+"Delete unused build config files (#1082)
+
+Delete config files for internal FCIB and test processes which are no longer in use."
+"Roadmap Update for 2020 (#1085)
+
+It is our GitHub anniversary, which means it is time to update the Windows Calculator project roadmap for 2020."
+"Graphing Calculator Diagnostics Instrumentation (#1041)
+
+* Add telemetry for keyboard button usage in graphing mode
+
+* Added the diagnostics for EquationAdded and FunctionAnalysis
+
+* Added remaining diagnostics events for graphing calculator
+
+* Fix proj files to include the IsStoreBuild condition. Move the Delayer class to the Calculator/Utils folder
+
+* Ensure the variable textbox has focus before logging diagnostics
+
+* Move maxVariableCount check into the tracelogger class
+
+* Created enums and updated the slider value changed method to remove the variable from the map after the log method is called
+
+* Re-enable hidden lines when the expression is updated
+
+* Fixed extra line in grapher.h and removed the conditional logging for variable count
+
+* Updated logging per PR feedback
+
+* Updated variable logging and fixed issues in the IsEquationLineDisabled binding the EditTextBox control.
+
+* Update per PR feedback
+
+* Added TraceLogging project to contain shared logging logic.
+
+* Updated TraceLogging project and updated tracelogger classes to use the TraceLogging project methods
+
+* Updated VariableLogging to log variable name. And updated per PR comments
+
+* Updated Variables logging to log count changed instead of variable added and fixed issue with variableSliders not being initialized
+
+* Remove outdated tracelogging call caused by rebase
+
+* Updated Delayer class to DispatcherTimerDelayer and fixed some small formatting issues
+
+* Fixed missing Dalyer class name updates
+
+* Removed extra line in traceloger.h"
+Reducing the number of wstring copies when constructing Unit and Category (#936)
+Remove CMakeLists for now (#1086)
+Use static_cast instead of C-style cast in UnitConverter.cpp  (#1089)
+"Support mouse gestures when active tracing is enabled (#1064)
+
+* Make the pointer follow the mouse
+
+* Only render when necessary
+
+* Move trace rendering to background thread"
+Don't display the history button when the panel disappears (#1081)
+Merge initializers and assignments (#1088)
+No need to invoke the compare method when we have an overloaded == operator. (#1091)
+"Remove unused ""this"" in async lambda expression (#1094)"
+"Persist variable settings after graph is plotted (#1055)
+
+* Allow copying graph as image
+
+* Persist variables
+
+* Revert ""Allow copying graph as image""
+
+This reverts commit 4fc9d798bc5f3ff82efc4fb00140103213fb81e2.
+
+* fix binding bug
+
+* undo cert change
+
+* fix animation
+
+* remove extra lines
+
+* remove overrides
+
+* undo key comment"
+Update TemporaryKey.pfx (#1100)
+Replace old C headers with the C++ ones (#1099)
+remove the password from the certificate (#1105)
+"Added Graphing Mode Jumplist Icons (#1107)
+
+* Added Graphing jumplist icons to the assets folder and Calculator project
+
+* Remove extra copy lines for the graphing engine dlls"
+Update calc version to 2002 (#1108)
+Add dual-screen support to Calculator (#1027)
+Remove adjustment from local time (#834)
+"Improve error handling by displaying an error message (#1075)
+
+* wire up error messages
+
+* more errors
+
+* fix crash on render error
+
+* Always show copy and cut
+
+* PR comments
+
+* Fix spelling"
+"Add line width option (#1098)
+
+* add line thickness
+
+* clean up
+
+* Fix pr comments"
+"Allow line style to be changed (#1097)
+
+* add line style
+
+* start line style
+
+* More fixes
+
+* undo key
+
+* more tweaks
+
+* address comments
+
+* Fix merge"
+Revert WinUI version back to 2.2 (#1113)
+Update the internals package (#1114)
+Check in localized strings 2020-03-24 (#1109)
+"Dark Theme For Graph Control (#1106)
+
+* Added dark them to graph control, started dark theme for the controls on the graph
+
+* Dark theme for graphing mode updated to use event model, diagnostics added, cleaned up code that wasn't needed
+
+* Updated prepare-release-internalonly.yaml internal package version
+
+* Updated Theme Settings properties, removed version change, other small changes from PR feedback>
+
+* Updated the localSettings check and updated the GraphTheme event to send bool instead of string
+
+* Updated the equation line color to change with the graph theme
+
+* Rebased onto master and issues created during the rebase
+
+* Updates per code review feedback
+
+* Update settings properties to just have IsMatchAppTheme property and updated the high contrast settings for the graph control
+
+* Match version to current in master
+
+* Updated per PR feedback
+
+* Fix resetting the m_lastLineColorIndex to only happen when reassignColors is true
+
+* Changed second if to else if in the OnPropertyChanged method
+
+* fixed control button and equation line colors"
+Fix some code analysis warnings in CalcManager (#1074)
+Updated the internals version to match the version with the latest graphing engine package. (#1121)
+"Make variable chevron focusable (#1096)
+
+* give chevron focus
+
+* fix merge issues
+
+* fix key"
+Fix trace value not appearing after touch input (#1120)
+Revert dual screen (#1134)
+Simplify bools. (#1116)
+Update calculator version to 2003 (#1142)
+Update default min/max values for variables (#1146)
+Updated the focus state when the KGF Back Button is pressed to go to the EquationEditBox for the previously analyzed function. (#1141)
+"Fix the operand order of logbasex for consistency (#1115)
+
+* Fix #851: inconsistent operand order for log_y(x)
+
+ - fixed the bug in scioper.cpp
+ - changed the related test in CalculatorUnitTests
+ - also changed the text in GraphingNumpad
+
+* Change the name of LogBaseX for consistency
+
+basically every occurence is repalced by logbasey, except
+for the localized string for narrator, which I left for
+the localization team to fix.
+
+* Fix the test
+
+* Revert GraphingNumPad.cpp
+
+* Fixup according to review"
+"Revert ""Revert WinUI version back to 2.2 (#1113)"" (#1147)"
+Added narrator announcement when a function is removed (#1136)
+"refactor HistoryTest.cpp to test the history using HistoryViewModel (#784)
+
+* refactor HistoryTest
+
+* modify MultiWindowUnitTests to not use m_standardCalcManager
+
+* rebase
+
+Co-authored-by: Rudy Huyn <rudy.huyn@microsoft.com>"
+CalculationResult: keep focus on Scroll buttons (#669)
+"Fix crash when using ""C"" key to clear equation (#1152)
+
+* Fix two pane crash on closing window
+
+* clearcrash"
+"Add Automation Names to UI Elements in EquationInputArea and KGF Panel (#1133)
+
+* Missing EquationInputArea and KGF Automation Names added
+
+* Updated the KGF back button automation name and tooltip and added the automation name string for the KGF equation edit box
+
+* Reverted the removal of x:names and updated Variable Step Textbox to Variable Step Value Textbox per PR feedback
+
+* Updated the VariableListViewItem narrator announcement to include the name of the variable"
+"Recycle equation colors when no longer in use (#1154)
+
+* Fix two pane crash on closing window
+
+* recycle equation colors
+
+* PR comments"
+"Update styling of graph settings textbox and add shadow (#1079)
+
+* Update internal package vers
+
+* fix more bugs
+
+* PR comments
+
+* PR comments
+
+* Undo last PR changes
+
+* Pr comments"
+Delay load GraphingNumPad::buttonOutput to not call localizationSettings too early (#1162)
+"Add Automation Names to the GraphNumPad (#1145)
+
+* Turn off keyboard shortcuts when in graphing mode
+
+* Added automation names to the graphnumpad, added any missing ones to the resources.resw file
+
+* Remove HonorShortcuts call in the EquationInputArea, update Equal button automation name to use the existing one
+
+* conditionally set the HonorShortcuts when the nav menu is closed
+
+* added disable shortcuts to override HonorShortcuts when it is set"
+"Update Icons Implement the Graph View Button (#1149)
+
+* Update icon file
+
+* function analysis and negate button icons updated
+
+* Replace zoom reset button with graph view button
+
+* Fixed issue where the window settings did not update after panning/zooming
+
+* Updated icon styling and added logic for updating the graph view button state when user manipulates the graph and when all equations are removed
+
+* updated LogGraphButton clicked to have an enum for the button value instead of a string
+
+* Updated the logic for how to set the IsManualAdjustment, ensured graphsettings now update IsManualAdjustment when changed"
+Fix line becoming enabled on focus lost (#1167)
+"Fixed crash when in high contrast (#1159)
+
+* Fixed line colors out of bounds issue when switching to high contrast
+
+* Update the fix to not reload the colors OnColorChanged when in HighContrast"
+"Change trace point value precision to be dynamic based on graph scale (#1148)
+
+* Dynamic precision
+
+* add comments
+
+* feedback
+
+* Update src/Calculator/Views/GraphingCalculator/GraphingCalculator.xaml.cpp
+
+Co-Authored-By: Rudy Huyn <rudyhuyn@gmail.com>
+
+* PR feedback
+
+* Pr comment
+
+Co-authored-by: Rudy Huyn <rudyhuyn@gmail.com>"
+Fix equation submitting twice when submitted via enter key (#1195)
+"Don't create a new flyout every time the graph settings button is clicked (#1197)
+
+* attempt a fix
+
+* fix ranges"
+"Set IsTextScaleFactorEnabled to true for HEX, DEC, OCT, BIN buttons (#1157)
+
+* fix scale factor
+
+* Allow expression to scale"
+"Fixed issue where Shortcuts were still enabled in Graphing Mode (#1196)
+
+* Fixed DisableShortcuts to disable per the specfic view id and fixed the issue where honorshortcuts did not set the value properly
+
+* Updated the condition to always set the honor shortcuts to false if disable shortcuts is true"
+"Scientific and Programmer tests (#779)
+
+* Maximize window during setup, and added divide by zero error test
+
+* Added Error_CubedNegativeNumber test and AOT buttons
+
+* Made Added AoT Tests and test are faster
+
+* Hotkey and Mouse Input BVT Test added, Memory Test started
+
+* Started Aligning BVTs with manual tests.  Added TC23466694, TC17416429, and TC17416884, and a test to switching mode test
+
+* Basic Scientific Mode Functional Test Tests
+
+* Added history panel test, and history flyout test for Standard calculator, and added the supporting framework
+
+* Added some functional tests for Scientific mode.
+
+* Basic Scientific Mode functional tests, added solution to set Angle Operator button correctly.
+
+* Created functions to resize the app to display history panel, to display history button, display memory panel, and memory button.  Then I applied them to reduce areas with rewritten code, and to help with over all test stability and speed.
+
+* I added the trigonometry functional tests
+
+* Pull from latetest master, and retargeted solution
+
+* Added a GetCalculatorWindowPostion function, when resizing window to show history/memory label, set window position to (0,0), and the same when resizing KOT calculator.  This will make tests more stable by keeping calculator on screen. It will also help with any testing that may require tracking the apps postion. To fix a test failure, changed function from ResizeToDiplayHistoryButton to ResizeToNotDisplayHistoryLabel.
+
+* Sorted Using Statements, modified .gitignore to ignore **src/out, etc...
+
+* Merged CalcMemoryFlyout into MemoryPanel, and deleted CalcMemoryFlyout. Merged CalcHistoryFlyout in HistoryPanel, and deleted CalcMemory.  Created GlobalCalculatorUI.cs.  Updated tests to work with these changes.
+
+* hold on to changes
+
+* Changed all KOT to Aot,
+Removed equal button click in Test Cleanup/History method uses page source,
+Removed extra line in Calculator.vcxproj.filters, Removed Try/Catch in the ClearHistory method
+
+* Removed unused elses
+Added CalculatorResults class
+Added StandardAoTCalculatorPage
+Removed manual test case info in the comments
+
+* - In test framework, where it worked,
+made some elements private
+- Created EnsureCalculatorHasFocus() in GlobalCalculatorUI.cs
+- Due to new classes, moved some methods to more correct classes
+- Moved ""page.MemoryPanel.ResizeWindowToDiplayMemoryLabel();"" from
+SetupCalculatorSession() to ClassInitialize()
+
+* Sorted Using
+
+* Updating fork from latest master
+
+* Don't stand so
+
+* Minor edits, fixing things from PR comments
+
+* Merging scientific and standard mode tests, minor merge conflict fixes
+
+* Method work
+- Created ResizeAoTWindowToDiplayInvertButton()
+    - Applied to test method AoT_ErrorMessage()
+- Added page.ScientificOperators.ResetFEButton(fEButtonState.Normal);
+to TestIniT in ScientificModeFunctionalTests
+- Fixed if statement in public void ResetFEButton(fEButtonState value)
+
+* Added StandardOperatorsPanel and removed duplicated code
+
+* Created tests for Programmer mode, fixed a typo that appeared in multiple locations
+
+* Fixed clear entry not working in Scientific test
+
+* This time I really fixed the problem with clear memory not being found every time
+
+* Revert shared changes
+
+* Rebased onto master and resolved conflicts
+
+* Fixed the 15 second delay on every scientific mode test
+
+* Greatly shortened bitflipkeypad test
+
+Co-authored-by: Crystal Edwards (Insight Global Inc) <v-credwa@microsoft.com>
+Co-authored-by: Crystal Edwards <45952655+v-credwa@users.noreply.github.com>"
+"Remove LRE/LRO characters from results and error messages (#1161)
+
+* Remove LRE/LRO characters and rely on Xaml to correctly displayed the numbers and error messages RtL
+
+* unit tests"
+"Update calculator version to 2004 (#1206)
+
+* Update props file to 2004
+
+* Update build/pipelines/azure-pipelines.release.yaml
+
+Co-authored-by: ItzLevvie <11600822+ItzLevvie@users.noreply.github.com>
+
+Co-authored-by: ItzLevvie <11600822+ItzLevvie@users.noreply.github.com>"
+Do not submit equations when in read only mode (#1201)
+"Catch exception when trying to share (#1203)
+
+* Fix crash
+
+* Fix errors"
+"Updated EquationButton contrast fixed dark mode foreground color bugs (#1155)
+
+* Fixed contrast between background and foreground colors in the equation button. Fixed the issue where the text in the equation text box is white when the background is white
+
+* Adjust the foreground color algorithm
+
+* moved the contrast method to utils so that it is resuable
+
+* Moved brushes for the GetContrastColor method to the app.xaml resource dictionary
+
+* Removed the change for the edit box colors, so it can be in a different PR"
+Logical_Operator_Decimal tests should ensure calculator is in decimal mode (#1208)
+Update SignConfig.xml to use new signType (#1209)
+Switching from Difference between dates to Add or subtract dates ignores the first date field (#1210)
+"Update tooltips for the Equation Button and Style Picker (#1163)
+
+* Update EquationButton automation name and tooltips
+
+* added tooltips to the stylepicker and fixed the issue where the color name did not update for dark mode colors
+
+* Update src/Calculator/Resources/en-US/Resources.resw
+
+Co-Authored-By: ItzLevvie <11600822+ItzLevvie@users.noreply.github.com>
+
+* fixed the issue where the colors are only listed as black in the tooltip and automation name
+
+* Add tooltips for high contrast colors
+
+Co-authored-by: ItzLevvie <11600822+ItzLevvie@users.noreply.github.com>"
+"Associate Units and Theme labels with the radio button groups (#1211)
+
+* Wrap theme radio buttons in MUXC RadioButtons control to fix accessibility issue where the buttons are grouped with the theme title
+
+* Associated theme labels with radio button groups"
+Fix issues with sin being parsed incorrectly (#1199)
+"Issue 935 - Updates to Scientific/Graphing Keypad  (#1214)
+
+* Switching from Difference between dates to Add or subtract dates ignores the first date field
+
+https://github.com/microsoft/calculator/issues/254
+
+Date field needs to persist across Date Difference and Add/Subtract From Date Mode.
+
+* Update DateCalculator.xaml.cpp
+
+Addressing review comments (white space, small code refactor), also found a null pointer exception during testing, this fix addresses that as well.
+
+* Issue 935 - Updates to Scientific/Graphing Keypad
+
+Update Scientific and Graphing keyboard layouts to expose square root button at the top level
+
+* Updated ScientificModeFunctionalTests/SmokeTest_Cube()
+
+Updated broken test to work with changes."
+Fix styling bugs in graph settings and style panel (#1202)
+"Don't submit equation when opening context menu (#1220)
+
+* Don't submit equation when opening context menu
+
+* Clean up"
+fix style bugs in graph options (#1225)
+Tweak UI: Title and History/Memory panels  (#1215)
+"Use ToggleButton for variable options chevron button (#1219)
+
+* Use togglebutton instead
+
+* Update src/Calculator/Views/GraphingCalculator/EquationInputArea.xaml
+
+Co-authored-by: Rudy Huyn <rudyhuyn@gmail.com>
+
+* Update src/Calculator/Views/GraphingCalculator/EquationInputArea.xaml
+
+Co-authored-by: Rudy Huyn <rudyhuyn@gmail.com>
+
+* undo pr suggestion
+
+Co-authored-by: Rudy Huyn <rudyhuyn@gmail.com>"
+Fix graph dark colors at launch (#1217)
+Remove duplicate string for submit button automation name (#1234)
+Remove more duplicate strings (#1235)
+Remove obsolete localization config file (#1236)
+Change precision and variables regarding the number of digits to be unsigned instead of signed (#1092)
+"Improve launch performance by delay loading NavigationView (#1213)
+
+* Delay load graph engine
+
+* Remove default behavior
+
+* Delay load nav view
+
+* Add automation properties
+
+* clean up
+
+* handle shortcut keys
+
+* Include only navview changes
+
+* Address PR comments
+
+* manual merge fix
+
+* PR Changes
+
+* Undo other changes
+
+* reset resw file
+
+* fix margin"
+Check in localized strings 2020-05-15 (#1233)
+"Adding Preview tag to Resources File (#1239)
+
+* Adding Preview tag to Resources File"
+"Handle non breaking white spaces in copy paste manager (#1226)
+
+* Handle non breaking white spaces in copy paste manager
+
+* handle other group characters"
+Remove saved commands from CalculatorManager (#1230)
+"Remove dead code from History (#1228)
+
+* Clean history
+
+* clean unit tests
+
+* cleaning
+
+* Remove friend class in HistoryViewModel"
+"Fixed narrator issues in KGF and GraphView button, updated Trig radio button corner radius (#1227)
+
+* fixed the trig units radio buttons rounded corners and narrator issues in kgf and graph reset
+
+* removed extra whitespace
+
+* Update src/Calculator/Resources/en-US/Resources.resw
+
+Co-authored-by: Eric Wong <eriwong@microsoft.com>
+
+* Update src/Calculator/Resources/en-US/Resources.resw
+
+Co-authored-by: Eric Wong <eriwong@microsoft.com>
+
+Co-authored-by: Eric Wong <eriwong@microsoft.com>"
+Translations Patch for Preview Tag (#1247)
+"Setting IsEnabled to be conditional based on the AlwaysOnTop flag, (#1243)"
+Fixing TestHistoryClearCommand Test (#1253)
+"Fix how we calculate the precision in Unit converter and update GetNumberDigitsWholeNumberPart  (#1256)
+
+* Fix 1255
+
+* optimization
+
+* spacing"
+Replace the short-life certificate with long-life one (#1166)
+Delay load graph engine dll (#1257)
+Disable x86 build and test in PR builds (#1258)
+Add localized strings 2020-06-02 (#1259)
+"Replot the graph when the user clicks Graph View after manually updating the graph range (#1254)
+
+* Reset the graph by replotting if the graph range was changed by the user
+
+* When calling SetDisplayRanges, just set Replot to true instead of passing in a parameter"
+Modify how we manage round corners (#1261)
+Update props file to 2005 (#1264)
+"Pre-Unit conversion work refactor, replace category with categoryID (#1260)
+
+Removed category as key in category to unit vector map and replaced with category id to reduce memory footprint."
+"Use NuGet 5.x (#1262)
+
+* Use NuGet 5.x
+* Use tool installer v1
+* Remove duplicate NonInteractive argument"
+Revert accidental changes to UITest projects (#1263)
+Add localized strings 2020-06-10 (#1266)
+Check for valid input in min/max/step fields (#1270)
+Fix bitwise popup focus order (#1273)
+Fix tracing button not receiving focus after the 'esc' key is used to exit tracing mode (#1272)
+Fix equations not getting focus after being removed (#1271)
+"Updates ResetGrid to account for when equations are added during Manual Adjustment mode (#1231)
+
+* updated the reset grid logic to track and set the initial range after an equation is added
+
+* When in manual adjustment mode and an equation is added, replot the graph when reset is called
+
+* remove members that are no longer needed
+
+* Added logic to include the PrepareGraph() and removed re-graphing in the ResetGrid method
+
+* skip SetDisplayRanges if TryInitialize returns a nullopt so there is no crash
+
+* Updated the logic to handle the case where the range is updated via settings
+
+* Fix bug with reset view hyperlink
+
+* Updated the logic for graph settings updating the graph range
+
+* Rebased with the latest, fixed issues with the rebase
+
+ Author:    Stephanie Anderl <46726333+sanderl@users.noreply.github.com>
+
+* Update the internals version of calculator to the latest so that the PrepareGraph API available"
+"Remove preview tag from graphing mode (#1285)
+
+* Remove preview tag
+
+* Remove preview tag
+
+* fix bug"
+Narrator reads incorrect information as “History and Memory list” in Programmer Calculator #1174 (#1286)
+"Update to 2006 (#1289)
+
+* Update props file to 2005
+
+* Update to 2006 release
+
+Co-authored-by: Pepe Rivera <joseartrivera@gmail.com>"
+"Updated APIs to use new GetClosePointData() from Graphing Engine. (#1250)
+
+* Updated APIs to use new GetClosePointData() from Graphing Engine. Now specifiying precision on API consumption to aid with correct display and rounding.
+
+* Updated function to be const-corect
+
+* Updated to use correct APIs
+
+* Converted TraceValue from Point to two doubles, point's X and Y was using float and conversion between float and doubles was causing unwanted rounding.
+
+* Update to pch file and fixing typo
+
+* Point to updated graphing version"
+"Fix link of mock implementation of the engine (#1309)
+
+Link of ""mock implementation of the engine"" is changed to ""/src/GraphingImpl/Mocks"" from ""/src/MockGraphingImpl"""
+"Narrator is not providing any confirmation after activating Keep on top button (#1300)
+
+* Narrator is not providing any confirmation after activating Keep on top button #1173"
+"Narrator does not provide the confirmation when user deleted one history from the history list items #1172 (#1302)
+
+* Narrator reads incorrect information as “History and Memory list” in Programmer Calculator #1174"
+Update to Localized Strings (#1313)
+Null Check in RenderMain::CanRenderPoint (#1316)
+Resolution for Bit Shift radio button announcements (#1317)
+Fix accent colour mouse-over (#1315)
+CornerRadius! (#1321)
+update localized strings (#1322)
+Update release version to 2007 (#1329)
+Update signing config in release build (#1330)
+Updated Resource Strings (#1332)
+"Skip items that are not enabled when creating jump list (#1333)
+
+* Fix jumplist bug
+
+* Add extra check"
+Update CI trigger to point at release/* branches (#1342)
+"Updated the Calculator projects to include the /Z7 compiler flag (#1337)
+
+* Added the /Z7 compiler flag
+
+* added /Z7 compiler flag to remaining calculator projects
+
+* Add %(AdditionalOptions) to complier configuration where it is missing"
+"Remove ICustomPropertyProviders (#1229)
+
+* Remove unused ICustomPropertyProviders
+* Modify UI tests to not use Customproperties"
+"Enable keyboard entry in bit-toggling mode #478 (#1346)
+
+The programmer radix buttons were being disabled when the bit flip panel was selected, causing keyboard events to be ignored.
+They should actually only be hidden in bit flip mode.
+
+- Corrected programmer radix buttons to continue being enabled just hidden when the programmer calculator is in bit flip mode.
+- Renamed AreProgrammerRadixOperatorsEnabled property to the more appropriate AreProgrammerRadixOperatorsVisible."
+"'Keep on top' button appears last in the tab order (#1339) (#1347)
+
+- Added TabIndex to AlwaysOnTop button"
+Pull internals package from WindowsInboxApps feed (#1348)
+"Change the initialization time of Radio button's isChecked (#1312)
+
+* Change the initialization time of Radio button's isChecked
+
+* Rollback checkDefaultBitShift and Use Enum instead of String
+
+* Fix Check Default
+- In previous versions, there was an issue where button availability was reset when opening BitShift Flyout not when the mode is changed
+
+* Reset Calculator Type in Calculator ViewModel when mode change to not Calculator mode
+
+* Revert ""Reset Calculator Type in Calculator ViewModel when mode change to not Calculator mode""
+
+This reverts commit a0d2f84513bc2d36fea3d75445782e1c67bc2e8d.
+
+* Check deferred load button"
+"Revert ""Updated the Calculator projects to include the /Z7 compiler flag"" (#1356)
+
+* Revert ""Updated the Calculator projects to include the /Z7 compiler flag (#1337)""
+
+This reverts commit 6299ec2303fab8e7b7f36ed57236afefa40fd73d.
+
+* Update Calculator.vcxproj
+
+Add  %(AdditionalOptions) where it is missing
+
+* Update TraceLogging.vcxproj
+
+Updated the AdditionalOptions to add /await /std:c++17 /utf-8  so this project is consistent with the other projects."
+Updating to 2008 version for release/2008 branch (#1358)
+Update release builds to 2009 (#1359)
+Loc patch (#1357)
+"Update WinUI Version to 2.4 (#1354)
+
+* Updated to WinUI2.4 and fixed NavMenu about flyout and Dark Mode EquationEditBox
+
+* Added updated equationbox background to the focusederror state"
+Update internals package to 0.0.49 (#1364)
+"Take the boundary of signed negative values into account( Fix issue 1301) (#1336)
+
+* Take the high boundary of signed negative values into account
+
+* UI unit tests for the Copy/Paste menu are added
+
+* Additional corner case for the number notations without negative values"
+"Fix Race condition in tests involving context menu (#1373)
+
+* Fix Race condition in tests involving context menu
+
+* remove extraneous logging"
+"Simplify KeyboardShortcutManager and correctly support Alt-Gr key (#1223)
+
+* Simplify KeyboardShortcutManager and correctly support Alt-Gr key
+
+* replace multimap with map
+move all global fields-functions to the class
+
+* feedback
+
+Co-authored-by: Eric Wong <eriwong@microsoft.com>"
+"Improved error handing for function analysis for functions in the f(y) format (#1338)
+
+* Updated the CanFunctionAnalysisBePerformed api to use the updated one with variableIsNotX error handling. Updated the UI to reflect the new descriptive error case to show an informative error.
+
+* Fixed spacing and updated the moved the variableIsNotX check up into the parent if statement
+
+* Update the internals version to match the version needed to support this change"
+"Add altform-colorful splashscreen pngs (#1374)
+
+* add altform-colorful splashscreen pngs
+
+* Clean up graphing dll tags in Calculator.vcxproj.filters"
+update resw files with latest translations (#1376)
+fix UI tests in lab runs (#1375)
+Update the pipeline internal version to 0.0.51 (#1393)
+"Fix typo in splash icon names (#1400)
+
+* Fix typo in splash screen icon names
+
+* Update the internals version to match the internal change
+
+* Update the internals version to match the internal change"
+"Edit fields are scalable for large fonts (#1401)
+
+* Edit fields are scalable for large fonts
+
+* Retain the initial width of edit fields, but scale if needed"
+"Fixed Negative Button for converters inconsistent with visibility (#1410)
+
+When the unit converter's category is changed, the corresponding property setter for the CurrentCategory variable mistakenly calls OnPropertyChanged(""CurrentCategory"") instead of RaisePropertyChanged(""CurrentCategory""). This results in a failure to notify XAML that the CurrentCategory variable has changed, resulting in the corresponding UI to not be updated accordingly."
+Clarified period definition (#1408)
+Enable nightly flighting (#1413)
+"fix: change floppy disk size (#1411)
+
+It is 1474560 bytes for standard 3,5' floppy"
+"Changed output of GetCurrentRadix to match the variable type of m_radix (#1416)
+
+Co-authored-by: PokeCodec <67983839+PokeCodec@users.noreply.github.com>"
+Improvements to CI pipeline (#1415)
+Updating version to 2010 for release fork (#1423)
+Update localized strings 2020-11-03 (#1422)
+Switch agent pool for internal releases (#1421)
+"Now that the release/2010 branch has been created, it's time to bump the master branch version to 2011 (#1424)"
+"switch to use policy manager apis for detecting graphing policy (#1426)
+
+* switch to use policy manager apis for detecting graphing policy
+
+* Remove RegGetValueW from NavCategory.cpp since it is no longer used."
+"Fixes issue #1409 (#1412)
+
+* Fixes issue #1409
+
+Copy pasting into Currency locks the editor.
+Skipping the validation of full editor lock when backspace or clear button is clicked.
+
+* Adding code review feedback.
+
+* Adding code review feedback."
+Lock m_renderMain in Grapher::TryInitializeGraph to avoid modifying m_graph during rendering (#1430)
+"Adding Test Method ""KeyboardInput_HistoryHotkeys"" (#1431)
+
+Now that #744 has been fixed, I'm adding Test Method ""KeyboardInput_HistoryHotkeys"" to test the functionality of history hotkeys such as [Shift] + [Ctrl] + [D] to help prevent a regression or a break."
+Updating to 2012 version after creating the 2011 release branch fork (#1442)
+Update localized strings 2020-12-01 (#1447)
+"Use different formatter for different currency (#1432)
+
+* Use different formatter for different currency
+
+* Add functional tests for currency fraction digit format
+
+* Revert ""Add functional tests for currency fraction digit format""
+
+This reverts commit bd8aab33847425f4dcfd0d76ce310c918729b2fd.
+
+* Add TestCurrencyFormattingLogic in UnitConverterViewModelUnitTests
+
+* Fix InitializeMultipleConverterTest
+
+* Add comment for a line of code
+
+* Add default case for switch in ConvertToLocalizedString
+
+* Remove trailing decimal
+Disable decimal input if maxFractionDigits is 0
+Fix input may be blocked after switched active
+
+* Fix: UpdateIsDecimalEnabled should do nothing for non-currency converter
+
+* Remove unnecessary SetValue method
+
+* Add a comment
+
+* Add functional UI Tests for currency converter
+Reset currency before tests
+Fix: input is blocked after switching to currency with less fractional digits
+
+* Set Priority=0 for currency format related tests
+
+* Truncate digits in display value after switcing
+To fix incorrect result after switching currency with less fractional digits"
+"Add link to GitHub repo on about flyout (#1449)
+
+* Add link to GitHub repo on about flyout
+
+* Update AboutFlyout page GitHub link margin.
+
+* Update AboutPage GitHub link string."
+"Prevents the user interface from shifting upwards at launch (#633)
+
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+Co-authored-by: Pepe Rivera <joseartrivera@gmail.com>"
+"Fix copy-pasting result computed by the calculator gives ""Invalid input"" (#1444)
+
+* Remove exponent value from operand length
+
+* Copy paste test with boundary exponential numbers."
+"Updateto2101release (#1457)
+
+Update version number to 10.2101.*."
+Update localized strings 2021-01-04 (#1458)
+Handle Space and Enter KeyDown event for About button (#1459)
+fix bug: No confirmation is announced by the narrator after activating 'Remove equation' button #1386 (#1465)
+"Fixup tests (#1429)
+
+- Removed unneeded ""ToString"" calls
+- Fixed typos
+- Renamed ""fEButtonState"" to ""FEButtonState"""
+Update graph internal engine verseion (#1466)
+Turn off DFS file shares in internal build system (#1470)
+"Improve clarity of math expressions in history for Standard Calculator (feature #138) (#1453)
+
+* Implemented feature & added unit tests
+
+* Fixed more unit/ui tests
+
+* Refactored tests
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp"
+"Adds unit-test cases for NarratorAnnouncement after fixing issue #1386 (#1469)
+
+* fix bug: No confirmation is announced by the narrator after activating 'Remove equation' button #1386
+
+* Unit Test: Add NarratorAnnouncementUnitTests
+
+Co-authored-by: tain <tankle_@hotmail.com>"
+Move localization pipeline sync schedule to the YAML file (#1478)
+"Add headers missing for compilation with GCC (#1468)
+
+Things that required such update included:
+* `wstringstream`
+* `setprecision`
+* `SCODE_CODE`, `E_BOUNDS`
+* Various SAL macros"
+"Fixed a graphing calculator ""permissions"" bug caused by PR #1426 (#1471)
+
+## Fixes a bug caused by https://github.com/microsoft/calculator/pull/1426#.
+
+
+### Description of the changes:
+- The PR #1426 can cause a crash when no users are returned via `User::FindAllAsync(UserType::LocalUser)` when subsequently trying to access the first user. The existing code also does not guarantee that the returned user is the currently active user.
+- This fix retrieves the user that opened the app and passes this user into a function to check if this user has the proper permissions to access the graphing mode. This makes sense since the active user is indistinguishable (at least from the app's perspective) to the user who opened the app. This user's permissions are then propagated downwards to properly set up the navigation menu of the app.
+- Implementation detail worth pointing out: `s_categoryManifest` is what is used to populate the navigation menu of the app, but this variable is static by design, so a separate function was written to override the appropriate `isEnabled` value in `s_categoryManifest`. This function is called by `onLaunched`.
+
+### How changes were validated:
+- Manual testing"
+Update nuget.config file (#1486)
+Update2102release (#1484)
+Update ManualTests.md (#1485)
+Update build year to 2021 (#1487)
+Update internal loc pipeline account (#1488)
+Update service connection name (#1505)
+"Update mainto2103release (#1504)
+
+* Updating to 2012 version after creating the 2011 release branch fork
+
+* Updating version to 2101 release in Main
+
+* Updating to 2102 release post-2101 release branch fork
+
+* Updating Main to release 2103 post-release branch fork for 2102"
+Temporarily disable PGO NuGet package (#1510)
+Update localized strings 2021-03-08 (#1511)
+"Temporarily disable PGO NuGet package (#1510) (#1513)
+
+Co-authored-by: Matt Cooley <macool@microsoft.com>"
+Always run loc pipeline (#1517)
+Update localized strings 2021-04-07 (#1521)
+"Disabled focus for 2nd button (#1523)
+
+Co-authored-by: achmurali <achmurali@github.com>"
+"Updating roadmap for 2021
+
+Updating roadmap for 2021"
+"Updating roadmap for 2021 (#1538)
+
+Updating roadmap for 2021"
+Update localized strings 2021-05-05 (#1539)
+Clang-format most of the sources (#1467)
+Add reference to #1545 in roadmap
+"Add internal CI pipeline (#1553)
+
+* Add CI-internal pipeline
+
+* No ARM64, to match release"
+Merge branch 'master' into master
+Improving keyboard support in VariableValueSlider (#1559)
+Remove PackageES LateTasks task (#1574)
+fixes the missed NULLs (#1576)
+Update service connection (#1582)
+Spelling fix in azure-pipelines.ci.yaml (#1591)
+"Hello C# - Migrating the codebase from C++/CX to C# (Phase 1) (#1598)
+
+* Hello C# - Going to an official feature branch (#1544)
+
+* change CalcViewModel into a WindowsRuntimeComponent project (#5)
+
+* change CalcViewModel into a WindowsRuntimeComponent project
+
+* remove the old UI codebase (#6)
+
+* initially migrated C# codebase by tian (#7)
+
+* initial migrated C# codebase by tian
+
+* format the codebase
+
+* resolve comments
+
+* undo: modifications on UI test project
+
+* Remove the blocks that have more than 1 empty line.
+
+* Register DP using keyword 'nameof'
+
+* C# Migration: Initially migrated C# codebase by Han (#8)
+
+* C# Migration: Initially migrated C# codebase by Han
+
+* Resolved comments and misssing asset
+
+* Added three files to Calculator project
+
+* Added TODO comment and updated Object
+
+* NavCategory: temporary resolution of the hang issue (#9)
+
+* Updated CalcViewModel and missing files (#10)
+
+* Updated CalcViewModel and WinMeta
+
+* Added Calculator.rc
+
+* Resolved comment for InitializeLocalizationSettings
+
+* add: views/unitconverter.xaml (#11)
+
+* add: views/unitconverter.xaml
+
+* format the code
+
+* remove the extra empty line
+
+* add an empty line
+
+* check null before invoking event handlers (#12)
+
+* fix problems of the migration of OBSERVABLE_PROPERTY_RW (#13)
+
+* fixes crash in MathRichEditBox.ctor() (#14)
+
+* fixes crash in MathRichEditBox.ctor()
+
+* typo
+
+* Update azure-pipelines.ci.yaml for Azure Pipelines
+
+* Added a link copy of CalcViewModel to temporarily pass Unit Tests (#16)
+
+* Updated CalcViewModelCopyForUT configuration (#17)
+
+* changes output path of the UI project to align with other projects (#15)
+
+* fixes EETypeLoadException issue: export class DelegateCommand (#18)
+
+* fixes EETypeLoadException issue: export class DelegateCommand
+
+* weak-reference in C++/CX
+
+* WeakRef in C# codebase
+
+* UTF-8-BOM
+
+* spaces in macro
+
+* resolve some comments from the offline review
+
+* format
+
+* rename file
+
+* fixes the memory list issue (#20)
+
+* fixes a wrongly migrated property
+
+* UTF-8-BOM
+
+* fixes up the crash of type casting (#21)
+
+* Update localized strings 2021-01-04 (#1458) (#23)
+
+(cherry picked from commit cdcb95656df0e5336d2cefe3e57afe0e58dc031a)
+
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+
+* Fixup tests (#1429) (#24)
+
+- Removed unneeded ""ToString"" calls
+- Fixed typos
+- Renamed ""fEButtonState"" to ""FEButtonState""
+
+(cherry picked from commit 66ad328d0018c360c1a0dc766f994c7fdb7d4a3f)
+
+Co-authored-by: N <71219152+PokeCodec@users.noreply.github.com>
+
+* Update graph internal engine verseion (#1466) (#25)
+
+(cherry picked from commit 0048dcb50031a2e94cd041282ed9a3511b4143b4)
+
+Co-authored-by: Quentin Al-Timimi <27322516+quentin987@users.noreply.github.com>
+
+* Turn off DFS file shares in internal build system (#1470) (#26)
+
+(cherry picked from commit 885fa23a898e8f029c4b21af5a6a9e6b2982722a)
+
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+
+* Improve clarity of math expressions in history for Standard Calculator (feature #138) (#1453) (#27)
+
+* Implemented feature & added unit tests
+
+* Fixed more unit/ui tests
+
+* Refactored tests
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+* Update HistoryTests.cpp
+
+(cherry picked from commit 565e3e2714ceb45ae7f2e860a319ea790ab24cef)
+
+Co-authored-by: Wei (Waley) Zhang <waley.zhang@microsoft.com>
+
+* Adds unit-test cases for NarratorAnnouncement after fixing issue #1386 (#1469) (#28)
+
+* fix bug: No confirmation is announced by the narrator after activating 'Remove equation' button #1386
+
+* Unit Test: Add NarratorAnnouncementUnitTests
+
+Co-authored-by: tain <tankle_@hotmail.com>
+(cherry picked from commit 9d8e2ad18c472fb9a511d67cb9430e8a7732552a)
+
+Co-authored-by: Tian L <60599517+MSFT-Tilia@users.noreply.github.com>
+
+* Move localization pipeline sync schedule to the YAML file (#1478) (#30)
+
+(cherry picked from commit 007eccd9408c80f8b60a947af03be934e8a99319)
+
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+
+* remove the strong reference carried from delegate (#32)
+
+* Remove the finalizer of ControlSizeTrigger (#31)
+
+* Normalize the namespace of CalcViewModel (#33)
+
+* ViewMode: arrange namespaces
+
+* UI build pass
+
+* run release
+
+* UT build pass
+
+* pass build
+
+* resolve comment: make the diff results cleaner
+
+* resolve comment: make the diff results cleaner (2)
+
+* resolve comment: make the diff results cleaner (3)
+
+* resolve comment: move impl into a namespace
+
+* update: spaces
+
+* update: CalculatorButtonUser.h
+
+* UTF-8 to UTF-8-BOM
+
+* remove ViewState.h/.cpp from CalcViewModel path
+
+* revert changes for NavCategory.cpp
+
+* remove extra space
+
+* remove UCM
+
+* remove BOM
+
+* Fixed a graphing calculator ""permissions"" bug caused by PR #1426 (#1471) (#34)
+
+- The PR #1426 can cause a crash when no users are returned via `User::FindAllAsync(UserType::LocalUser)` when subsequently trying to access the first user. The existing code also does not guarantee that the returned user is the currently active user.
+- This fix retrieves the user that opened the app and passes this user into a function to check if this user has the proper permissions to access the graphing mode. This makes sense since the active user is indistinguishable (at least from the app's perspective) to the user who opened the app. This user's permissions are then propagated downwards to properly set up the navigation menu of the app.
+- Implementation detail worth pointing out: `s_categoryManifest` is what is used to populate the navigation menu of the app, but this variable is static by design, so a separate function was written to override the appropriate `isEnabled` value in `s_categoryManifest`. This function is called by `onLaunched`.
+
+- Manual testing
+
+Co-authored-by: Wei (Waley) Zhang <waley.zhang@microsoft.com>
+
+* fixes up a bug (#35)
+
+* fix csproj (#37)
+
+Co-authored-by: hanzhang54 <zhangh@microsoft.com>
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+Co-authored-by: N <71219152+PokeCodec@users.noreply.github.com>
+Co-authored-by: Quentin Al-Timimi <27322516+quentin987@users.noreply.github.com>
+Co-authored-by: Wei (Waley) Zhang <waley.zhang@microsoft.com>
+Co-authored-by: Tian L <60599517+MSFT-Tilia@users.noreply.github.com>
+
+* **BYPASS_SECRET_SCANNING** (#1546)
+
+* Fixes a bug about the UI of expression tokens (#1547)
+
+* fix
+
+* [FeatureBranch] Fixes x86/ARM/ARM64 builds for the CI-Pipeline (#1550)
+
+* **BYPASS_SECRET_SCANNING**
+
+* fix
+
+* fixes x86/ARM/ARM64 builds for CI-Pipeline
+
+* Add headers missing for compilation with GCC (#1468) (#1551)
+
+Things that required such update included:
+* `wstringstream`
+* `setprecision`
+* `SCODE_CODE`, `E_BOUNDS`
+* Various SAL macros
+
+Co-authored-by: Michał Janiszewski <janisozaur@users.noreply.github.com>
+
+* Update nuget.config file (#1486) (#1552)
+
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+
+* Fixes up some simple miscellaneous TODO items (#1556)
+
+* #DEBUG is a known C# preprocessor directive
+
+* So far, we haven't observed the problem described in the comment from C# async
+
+* fixes misc TODO items
+
+* resolve some warnings (#1564)
+
+* Add internal CI pipeline (#1553) (#1565)
+
+* Add CI-internal pipeline
+
+* No ARM64, to match release
+
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+
+* Temporarily disable PGO NuGet package (#1510) (#1566)
+
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+
+* [C# Calc]Removes WinMeta.cs (#1567)
+
+* remove WinMeta.cs
+
+* undo a trivial change
+
+* UTF-8 BOM
+
+* [C# Calc] Reverts some changes for Currency constants (#1570)
+
+* Update2108release - experimental (#1572)
+
+* adjusts Calculator.csproj (#1571)
+
+* fixes BinSkim problems (#1573)
+
+* fixes an issue around line style (#1575)
+
+* fixes the missed NULLs (#1576) (#1578)
+
+* Fix the Missing Part in Unit Converter Constructor (#1579)
+
+* fixes: calculator doesn't remember its previous mode (#1580)
+
+* Fixes: GraphingNumber doesn't work correctly (#1585)
+
+* fixes: GraphingNumber doesn't work correctly
+
+* Avoid crashing
+
+* fixes binding (#1586)
+
+* resolve TODO items (#1589)
+
+* Improving keyboard support in VariableValueSlider (#1559) (#1595)
+
+Co-authored-by: Dave Grochocki <grochocki@users.noreply.github.com>
+
+* [C# Calc] Fixes: Keep the value away from getting rounded in Graphing Mode (#1596)
+
+* keep the value away from getting rounded
+
+* set the display precision to 6 to align with C++ impl
+
+* fixes the button-light-up time (#1597)
+
+* fixes up merging flaws
+
+* Update2108release
+
+* fixes (#1599)
+
+* keep master for ci pipeline
+
+* remove the Resources filter from CalcViewModel project
+
+* removes `that` since `this` can be captured automatically
+
+* AppxBundlePlatforms
+
+* StampAssemblyInfo
+
+* removes PreferredToolArchitecture
+
+* Change the arg AppVersion into Version
+
+* Change the arg AppVersion into Version
+
+* from Calculator.rc to AssemblyInfo.cs
+
+* Adds assembly-info
+
+Co-authored-by: hanzhang54 <zhangh@microsoft.com>
+Co-authored-by: Matt Cooley <macool@microsoft.com>
+Co-authored-by: N <71219152+PokeCodec@users.noreply.github.com>
+Co-authored-by: Quentin Al-Timimi <27322516+quentin987@users.noreply.github.com>
+Co-authored-by: Wei (Waley) Zhang <waley.zhang@microsoft.com>
+Co-authored-by: Tian L <60599517+MSFT-Tilia@users.noreply.github.com>
+Co-authored-by: Michał Janiszewski <janisozaur@users.noreply.github.com>
+Co-authored-by: Dave Grochocki <grochocki@users.noreply.github.com>"
+"fixed titlebar (#1613)
+
+Fixes titlebar text high contrast issue."
+"Update to WinUI 2.6 (#1618)
+
+* Update to WinUI 2.6
+
+Co-authored-by: Han Zhang <zhangh@microsoft.com>
+Co-authored-by: Kenny Guo <kennyguo@microsoft.com>
+
+**Description of the changes:**
+1. Update to WinUI 2.6 styles and controls #1606.
+2. Add Mica Material #1611.
+3. Add Settings page #596.
+4. Fix Ctrl+E shortcuts in AoT mode #1590.
+
+**How changes were validated:**
+Passed build, UT/UI test and manually tested.
+
+* Fixed the display issue in AOT mode (#1615)
+
+* Fixed the display issue in AOT mode
+
+* Get the OpenPaneLength from the resource
+
+* Fix CalendarView style in DateCalculation of dark mode (#1616)
+
+* Fix a style problem of Date Calculator, and clean some unused codes
+
+* Remove some unused codes
+
+* Disable Mica before close the window to resolve a crash (#1619)
+
+* Bump internal package build number (#1621)"
+"Update focus style (#1622)
+
+* Update focus style
+
+* Update style name"
+"Add accelerator for back button in titlebar (#1626)
+
+Listen to the system back request to back to main page."
+"Improve narrator messages of Settings page and fix some styles (#1623)
+
+* Improve narrator screen reader messages of Settings page
+
+* Fix hyperlink styles in Settings page
+
+* Fix hover background of navigation buttons in calendar view"
+"add automation name for history and memory list item (#1628)
+
+* add automation name for history and memory list item
+
+* fix UI tests
+
+Co-authored-by: Yiyi Zhang <Yiyi.Zhang@microsoft.com>"
+"Fix a UI test (#1631)
+
+Co-authored-by: Yiyi Zhang <Yiyi.Zhang@microsoft.com>"
+Fix the inconsistent behavior between narrator and keyboard focus (#1633)
+Fix title bar string trimming issue and right-to-left display issue (#1635)
+fixes up the name of dps (#1638)
+reverts back the content that was deleted wrong. (#1641)
+Update ProvData to true (#1653)
+"Fix the result in wrong number base while leaving and switching back … (#1654)
+
+* Fix the result in wrong number base while leaving and switching back to Programmer
+
+* Rename ResetDisplay() to ResetRadix()
+
+* Update related unit test
+
+* Fixed the decimal number with point in programmer memory"
+Update localized strings 2021-08-20 (#1657)
+Update WinUI to build 2.6.2 (#1660)
+"Simple fix for the omitted multiplication sign before a left parenthesis (#1661)
+
+* simple fix for the omitted multiplication sign
+
+* accepts unary-op-code"
+"Restructure pipeline to move release steps out of Package ES (#1659)
+
+* Pipeline update
+* moving download internals up in order
+* updated internal download step and removed duplicate isPublicRelease parameter"
+Fix mistakes (#1643)
+associate combox with its label 'Thickness' (#1663)
+"Fix for #1666- Back button is not accessible via keyboard when navigating to the about page. (#1679)
+
+* initial changes
+
+* margin
+
+* format
+
+* resolve review comments
+
+* Popup Content Height"
+"Add release appxmanifest (#1682)
+
+Currently, the copy of Package.appxmanifest in this repo is overwritten with a copy from an internal repo during release builds. This change adds the release version of Package.appxmanifest to this repo, to make it easier to maintain and keep it in sync with the copy used during development."
+"Make Calculator the default startup project (#1683)
+
+Fix two issues with the solution file:
+- List the ""Calculator"" project first, which causes Visual Studio to choose it as the startup project when the repo is first checked out. This makes it easier for people to get started coding in this repo.
+- Don't nest the ""CalcManager"" project under the ""Solution Items"" folder."
+"Update resource value from title casing to sentence casing (#1687)
+
+* Update resource value from title casing to sentence casing
+
+* Update more resources"
+"UI tests should use CI runsettings in internal CI builds (#1686)
+
+After the change in #1682, the internal CI build uses the .Dev app identity. Use the runsettings for UI tests that has the .Dev app identity."
+Aero upload task added (#1692)
+bumps the major version to 11 (#1698)
+fixes a UI test case: AoT_ButtonOnlyInStandard (#1702)
+use the correct manifest to update version (#1701)
+Mention C# in the README (#1703)
+Update bundle version to 2021 (#1706)
+Fix dropDown to dropdown (#1709)
+updates the minor version to 2110 (#1718)
+Update localized strings 2021-10-14 (#1721)
+Ensure element presence is checked prior to its use (#1715)
+Remove unnecessary metadata to reduce binary size (#1727)
+update the minor version to 2111 (#1733)
+"Drop non-negative tests on unsigned values (#1729)
+
+As some of the variables are of unsigned types, it makes no sense to
+test them for non-negativeness, as this is enforced by type already."
+Bump the minor version to 2112 (#1754)
+"Run loc pipeline on windows-2022 image (#1761)
+
+Run the localization pipeline on the windows-2022 image. We will be switching to windows-2022 and Visual Studio 2022 for the main app builds sometime soon. It doesn't really matter which image the loc pipeline runs on, but switching it to windows-2022 will help keep all pipelines consistent."
+Upgrade to WinUI 2.7 (#1766)
+Update build year in settings page to 2022 (#1770)
+Remove NuGetCommand workaround in YAML (#1762)
+bump the minor version to 2201 - happy new year. (#1771)
+"Add SBOM task (#1768)
+
+* Add SBOM task
+
+* move the SBOM task to release pipeline"
+New look of `Calculator` in Windows 11 (#1773)
+Delete packages.config (#1781)
+delete unuseful semicolon (#1783)
+bump ther minor version to 2202 (#1784)
+"Build with Visual Studio 2022 (#1793)
+
+- Use Visual Studio 2022
+- Use an Azure Pipelines image which has Visual Studio 2022 installed
+- Use the v143 C++ build tools
+- Use the Windows SDK version 22000
+- Raise the minimum platform version to 17763
+  - As a consequence of this change, we will use the ""msix"" file extension instead of ""appx"" for our packages
+- Update UI tests from .NET Core 2.1 to .NET Core 3.1"
+Replace dead link in ApplicationArchitecture.md (#1794)
+"Don't maximize Calculator's window on some small screen devices (#1791)
+
+Added an AppExtension to Calculator so it no longer maximize by default on small screen device."
+Update internals package to 0.0.78 (#1797)
+Update localized strings 2022-02-15 (#1798)
+Switch internal localization pipeline to new pool (#1800)
+"Fixes a bug: currency converter never shows error message for service failures (#1799)
+
+* check status before registering callback
+
+* optimize the style for error msg"
+run builds in different pools (#1802)
+Set versionBuild automatically (#1803)
+Disable buttons when units are not loaded (#1805)
+bump the minor version to 2203 (#1811)
+update the minor version to 2204 (#1815)
+"NavCategory | Partial refactor and perf optimization (#1820)
+
+* Partially refactor NavCategory
+
+* Lazy load the states of GraphingMode Category
+
+* code cleanup
+
+* find_if to any_of
+
+* remove Windows.System
+
+* resolve warning WMC1507
+
+* resolve comments
+
+* fix indentations"
+fix a regression in keyboard manager (#1824)
+update the minor version to 2205 (#1818)
+fix crash: GetPolicyFromPathForUser (#1826)
+add a unit-test case (#1830)
+Fix sln file so it opens in Visual Studio 17.2 (#1833)
+Fix blurry buttons (#1821)
+"Fix primary display bug by adding leading 0's to binary values (#1760)
+
+* Fix binary display missing leading 0's (#1739)
+
+* Added leading 0's to binary values in Progremmer Mode UI tests
+
+Co-authored-by: mattclin <mattclin.umich.edu>"
+Updated function input list and list item names for accessibilty purposes (#1778)
+"Fix ""Shortcu"" typo in file name (#1839)
+
+Now the file is named ""KeyboardShortcutManager.cs"""
+"Code cleanup: Use number formatting utilities from the standard library (#1743)
+
+* Use general format in Graphing Calculator share
+
+* Use stringstream (general format) to format graph settings min/max
+
+* cleanup"
+Add vscode auto-generated folder to .gitignore (#1842)
+"Fix the captured access key in the result box
+
+* Fix issue #1782
+
+* Fixed issue 1782
+
+* Fix issue 1782
+
+* Fix issue #1782
+
+* Fix Issue #1782
+
+Co-authored-by: Jesus Baylon <t-jbaylon@microsoft.com>"
+"Run C# import cleanup based on the Solution files (#1838)
+
+This is to make the style consistent with the rest of the project as well as removing unused imports."
+Update all references to main branch (#1854)
+Update azure-pipelines.release.yaml (#1855)
+Update azure-pipelines.release.yaml (#1856)
+"Update screenshots for Store product description page (#1864)
+
+* Update build-single-architecture.yaml
+
+* Update package-msixbundle.yaml"
+Move the nuget.config to the root of the repo (#1868)
+Update localized strings 2022-07-22 (#1867)
+Volkcor/Update internal repo version to update screenshots for Store PDP (#1870)
+"Update internal package version (#1871)
+
+* Update internal package
+
+* Update internal package version
+
+* Update internal package"
+"Move UI tests to Windows 11 (#1866)
+
+Calculator's UI tests currently run on Server 2022 VM images. However, the production app is primarily developed for Windows 11. This change moves the UI test jobs to run on Windows 11, so we can run our tests in an environment that's closer to what real users will experience."
+Update azure-pipelines.release.yaml (#1872)
+"Migrate FabricBot Tasks to Config-as-Code (#1857)
+
+Co-authored-by: msftbot[bot] <48340428+msftbot[bot]@users.noreply.github.com>"
+"Use NuGet 6.x (#1874)
+
+Update the build pipeline to use the latest available version of NuGet."
+"Update to WinUI 2.8 (#1875)
+
+* Update to WinUI 2.8
+
+* BinSkim bypass WebView2Loader.dll
+
+* BinSkim bypass Microsoft.Web.WebView2.Core.dll"
+add ARM64 config (#1881)
+Update azure-pipelines.release.yaml (#1885)
+"Replace HttpWebRequest with HttpClient (#1886)
+
+HttpWebRequest is deprecated and it is trivial to ping using the replacement API."
+Include cstdint in CalcErr.h for uint32_t et al (#1892)
+"Use ""make_unique"" instead of manually allocating and then creating a unique pointer (#1899)"
+Fix DwWordBitWidthFromeNumWidth typo (#1898)
+"Resolve TODO - MSFT 12735088 (#1901)
+
+Since we use minimum version 17763, we can safely remove these namespaces"
+"Use a switch statement instead of an array (#1900)
+
+This makes processing of opCodes faster"
+"Use copy_n instead of of copy (#1897)
+
+It is a better choice for this occasion and more performant."
+"Remove always-false UITest check (#1904)
+
+startUpTimeout can never be null. It is impossible. Fixes build warning"
+"Nuget updates (#1891)
+
+* Update Microsoft.NETCore.UniversalWindowsPlatform 6.2.10 -> 6.2.14
+
+* Update Microsoft.UI.Xaml 2.8.0 -> 2.8.1
+
+* Update MSTest NuGet packages to 2.2.10
+
+* Update Microsoft.NET.Test.Sdk 17.0.0 -> 17.3.1
+
+* Update Appium.WebDriver 4.3.1 -> 4.3.2"
+Use using instead of typedef (#1903)
+Clarify that Windows 11 is required to build (#1893)
+"Make the Ping method thread-safe (#1905)
+
+So we do not risk blocking the main UI thread"
+Use enhanced switches (#1908)
+Simplify SetTrigRowVisibility (#1913)
+Use lambdas instead of making new Handler objects (#1915)
+"Remove partial keyword from Globals (#1909)
+
+Globals does not need to be a partial class at all"
+"Simplify OnAppPropertyChanged (#1914)
+
+Use a switch statement instead of else-if"
+Remove stray semicolon (#1917)
+Remove unneeded closing check (#1910)
+Update azure-pipelines.release.yaml (#1925)
+"Remove redundant breaks (#1919)
+
+They do not need to be there since return works here."
+"Fix ""isIntgerMode"" typo (#1921)"
+"Refactor CopyPasteManager (#1918)
+
+Get the object reference and use that instead of accessing the array twice to get the object"
+Use string interpolation instead of calling Format (#1929)
+Simplify ChangeConstants (#1912)

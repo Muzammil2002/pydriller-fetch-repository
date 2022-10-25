@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<data>
+  <row>
+    <index>0</index>
+    <suitname>Fabrics 3 Piece Suit</suitname>
+    <des>Essentials Dyed Embroidered Top Bottoms Dupatta</des>
+    <price>Rs. 4,490</price>
+  </row>
+  <row>
+    <index>1</index>
+    <suitname>Fabrics 2 Piece</suitname>
+    <des>Essentials Dyed Embroidered Top Bottoms</des>
+    <price>Rs. 2,990</price>
+  </row>
+  <row>
+    <index>2</index>
+    <suitname>Fabrics 3 Piece Suit</suitname>
+    <des>Essentials Dyed Embroidered Top Bottoms Shawl</des>
+    <price>Rs. 4,690</price>
+  </row>
+  <row>
+    <index>3</index>
+    <suitname>Flared Kameez</suitname>
+    <des>Signature Dyed Embroidered Kurta</des>
+    <price>Rs. 5,593</price>
+  </row>
+  <row>
+    <index>4</index>
+    <suitname>Classic Kameez</suitname>
+    <des>Signature Printed Embroidered Kurta</des>
+    <price>Rs. 6,392</price>
+  </row>
+  <row>
+    <index>5</index>
+    <suitname>Classic Kurta</suitname>
+    <des>Signature Dyed Embroidered Kurta</des>
+    <price>Rs. 3,843</price>
+  </row>
+  <row>
+    <index>6</index>
+    <suitname>Flared Kameez</suitname>
+    <des>Signature Printed Embroidered Kurta</des>
+    <price>Rs. 5,912</price>
+  </row>
+  <row>
+    <index>7</index>
+    <suitname>Drop Shoulder</suitname>
+    <des>Essentials Dyed</des>
+    <price>Rs. 6,392</price>
+  </row>
+</data>
